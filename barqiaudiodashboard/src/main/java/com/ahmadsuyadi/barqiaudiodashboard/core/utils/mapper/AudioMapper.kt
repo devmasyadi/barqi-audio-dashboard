@@ -14,7 +14,8 @@ object AudioMapper {
                 lyric = it.lyric,
                 url = it.url,
                 artist = it.artist,
-                lastView = it.lastView
+                lastView = it.lastView,
+                image = it.image
             )
         }
 }
