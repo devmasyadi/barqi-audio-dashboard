@@ -11,4 +11,5 @@ class BarqiInteractor (private val iBarqiRepository: IBarqiRepository): BarqiUse
     override fun getAds() = iBarqiRepository.getAds()
     override fun getArtists() = iBarqiRepository.getArtists()
     override fun getAudios() = iBarqiRepository.getAudios()
+    override fun increaseView(idAudio: String) = iBarqiRepository.increaseView(idAudio)
 }

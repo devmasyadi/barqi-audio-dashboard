@@ -4,7 +4,9 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AdsR
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
 import io.reactivex.Flowable
+import okhttp3.ResponseBody
 import retrofit2.http.GET
+import retrofit2.http.PATCH
 import retrofit2.http.Query
 
 interface ApiService {
@@ -22,4 +24,9 @@ interface ApiService {
     fun getAudios(
         @Query("packageName") packageName: String
     ): Flowable<List<AudioResponse>>
+
+    @PATCH("api/musics/counterViews")
+    fun increaseView(
+        @Query("id") idAudio: String
+    ): Flowable<ResponseBody>
 }

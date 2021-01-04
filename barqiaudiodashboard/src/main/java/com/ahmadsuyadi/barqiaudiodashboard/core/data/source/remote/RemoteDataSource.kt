@@ -10,6 +10,7 @@ import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
+import okhttp3.ResponseBody
 
 class RemoteDataSource(
     private val apiService: ApiService
@@ -49,6 +50,21 @@ class RemoteDataSource(
     fun getAudios(packageName: String): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getAudios(packageName)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(it)
+            }, {
+                resultData.onError(it)
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    fun increaseView(idAudio: String): Flowable<ResponseBody> {
+        val resultData = PublishSubject.create<ResponseBody>()
+        apiService.increaseView(idAudio)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
             .take(1)

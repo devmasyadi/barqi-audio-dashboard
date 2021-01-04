@@ -10,4 +10,5 @@ interface IBarqiRepository {
     fun getAds(): Flowable<Resource<Ads>>
     fun getArtists(): Flowable<Resource<List<Artist>>>
     fun getAudios(): Flowable<Resource<List<Audio>>>
+    fun increaseView(idAudio: String)
 }
