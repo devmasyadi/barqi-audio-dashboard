@@ -22,6 +22,11 @@ val networkModule = module {
                     HttpLoggingInterceptor.Level.BODY
                 else
                     HttpLoggingInterceptor.Level.NONE))
+            .addInterceptor {
+                val request =
+                    it.request().newBuilder().addHeader("access-token", ConfigBarqiAudioDashboard.ACCESS_TOKEN).build()
+                it.proceed(request)
+            }
             .connectTimeout(120, TimeUnit.SECONDS)
             .readTimeout(120, TimeUnit.SECONDS)
             .build()
