@@ -13,6 +13,6 @@ interface IBarqiRepository {
     fun getAudios(): Flowable<Resource<List<Audio>>>
     fun increaseView(idAudio: String)
     fun getArtistsV2(): Flowable<Resource<List<ArtisV2>>>
-    fun getAudiosTrending(packageName: String?, limit: Int?): Flowable<Resource<List<Audio>>>
+    fun getAudiosTrending(limit: Int?): Flowable<Resource<List<Audio>>>
     fun getAudiosRecent(limit: Int?): Flowable<Resource<List<Audio>>>
 }

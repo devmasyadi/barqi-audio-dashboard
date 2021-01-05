@@ -107,10 +107,7 @@ class BarqiRepository(
     }
 
     @SuppressLint("CheckResult")
-    override fun getAudiosTrending(
-        packageName: String?,
-        limit: Int?
-    ): Flowable<Resource<List<Audio>>> {
+    override fun getAudiosTrending(limit: Int?): Flowable<Resource<List<Audio>>> {
         val resultData = PublishSubject.create<Resource<List<Audio>>>()
         GlobalScope.launch(Dispatchers.Main) {
             resultData.onNext(Resource.Loading())
