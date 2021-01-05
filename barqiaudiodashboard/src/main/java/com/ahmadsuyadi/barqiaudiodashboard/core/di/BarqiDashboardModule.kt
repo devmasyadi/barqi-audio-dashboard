@@ -17,14 +17,19 @@ import java.util.concurrent.TimeUnit
 val networkModule = module {
     single {
         OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor()
-                .setLevel(if (androidContext().applicationInfo.flags == 0)
-                    HttpLoggingInterceptor.Level.BODY
-                else
-                    HttpLoggingInterceptor.Level.NONE))
+            .addInterceptor(
+                HttpLoggingInterceptor()
+                    .setLevel(
+                        if (androidContext().applicationInfo.flags == 0)
+                            HttpLoggingInterceptor.Level.BODY
+                        else
+                            HttpLoggingInterceptor.Level.NONE
+                    )
+            )
             .addInterceptor {
                 val request =
-                    it.request().newBuilder().addHeader("access-token", ConfigBarqiAudioDashboard.ACCESS_TOKEN).build()
+                    it.request().newBuilder()
+                        .addHeader("access-token", ConfigBarqiAudioDashboard.ACCESS_TOKEN).build()
                 it.proceed(request)
             }
             .connectTimeout(120, TimeUnit.SECONDS)

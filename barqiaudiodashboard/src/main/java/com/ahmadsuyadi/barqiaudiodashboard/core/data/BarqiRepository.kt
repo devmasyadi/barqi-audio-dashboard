@@ -4,12 +4,14 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Ads
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.ArtisV2
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Artist
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.handleMessageError
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.AdsMapper
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.ArtistMapper
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.ArtistV2Mapper
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.AudioMapper
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -84,5 +86,62 @@ class BarqiRepository(
             .observeOn(AndroidSchedulers.mainThread())
             .take(1)
             .subscribe()
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getArtistsV2(): Flowable<Resource<List<ArtisV2>>> {
+        val resultData = PublishSubject.create<Resource<List<ArtisV2>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.getArtistsV2(context.packageName)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(Resource.Success(ArtistV2Mapper.mapResponsesToDomains(it)))
+            }, {
+                resultData.onNext(Resource.Error(it.handleMessageError()))
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getAudiosTrending(
+        packageName: String?,
+        limit: Int?
+    ): Flowable<Resource<List<Audio>>> {
+        val resultData = PublishSubject.create<Resource<List<Audio>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.getAudiosTrending(context.packageName, limit)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+            }, {
+                resultData.onNext(Resource.Error(it.handleMessageError()))
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getAudiosRecent(limit: Int?): Flowable<Resource<List<Audio>>> {
+        val resultData = PublishSubject.create<Resource<List<Audio>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.getAudiosRecent(limit)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+            }, {
+                resultData.onNext(Resource.Error(it.handleMessageError()))
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 }

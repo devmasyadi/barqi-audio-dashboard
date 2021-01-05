@@ -2,6 +2,7 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network
 
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AdsResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistV2Response
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
 import io.reactivex.Flowable
 import okhttp3.ResponseBody
@@ -29,4 +30,22 @@ interface ApiService {
     fun increaseView(
         @Query("id") idAudio: String
     ): Flowable<ResponseBody>
+
+    @PATCH("api/apps/artistV2")
+    fun getArtistsV2(
+        @Query("packageName") packageName: String
+    ): Flowable<List<ArtistV2Response>>
+
+    @PATCH("api/apps/trending")
+    fun getAudiosTrending(
+        @Query("packageName") packageName: String,
+        @Query("limit") limit: Int? = 0
+    ): Flowable<List<AudioResponse>>
+
+    @PATCH("api/apps/recent")
+    fun getAudiosRecent(
+        @Query("limit") limit: Int? = 0
+    ): Flowable<List<AudioResponse>>
+
+
 }
