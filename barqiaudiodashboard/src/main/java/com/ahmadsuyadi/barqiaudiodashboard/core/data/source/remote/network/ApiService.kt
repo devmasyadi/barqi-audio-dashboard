@@ -36,13 +36,13 @@ interface ApiService {
         @Query("packageName") packageName: String
     ): Flowable<List<ArtistV2Response>>
 
-    @GET("api/apps/trending")
+    @GET("api/apps/audios/trending")
     fun getAudiosTrending(
         @Query("packageName") packageName: String,
         @Query("limit") limit: Int? = 0
     ): Flowable<List<AudioResponse>>
 
-    @GET("api/apps/recent")
+    @GET("api/apps/audios/recent")
     fun getAudiosRecent(
         @Query("limit") limit: Int? = 0
     ): Flowable<List<AudioResponse>>
