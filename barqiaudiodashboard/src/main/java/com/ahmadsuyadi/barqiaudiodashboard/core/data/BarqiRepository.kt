@@ -196,6 +196,18 @@ class BarqiRepository(
     }
 
     @SuppressLint("CheckResult")
+    override fun isAudioFavorite(idAudio: String): Flowable<Boolean> {
+        val resultData = PublishSubject.create<Boolean>()
+        localDataSource.isFavoriteAudio(idAudio)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{
+                resultData.onNext(!it.isNullOrEmpty())
+            }
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
     override fun setRecentPlayedAudio(audio: Audio) {
         localDataSource.insertRecentPlayedAudio(RecentPlayedAudioMapper.mapAudioToEntity(audio))
             .diskIO()

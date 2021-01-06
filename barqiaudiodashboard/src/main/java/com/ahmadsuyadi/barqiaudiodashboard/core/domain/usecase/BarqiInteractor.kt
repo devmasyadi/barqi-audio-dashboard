@@ -20,6 +20,7 @@ class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUse
         iBarqiRepository.removeAudioFromFavorite(idAudio)
 
     override fun getFavoriteAudios() = iBarqiRepository.getFavoriteAudios()
+    override fun isAudioFavorite(idAudio: String) = iBarqiRepository.isAudioFavorite(idAudio)
     override fun setRecentPlayedAudio(audio: Audio) = iBarqiRepository.setRecentPlayedAudio(audio)
     override fun getRecentPlayedAudios() = iBarqiRepository.getRecentPlayedAudios()
 }

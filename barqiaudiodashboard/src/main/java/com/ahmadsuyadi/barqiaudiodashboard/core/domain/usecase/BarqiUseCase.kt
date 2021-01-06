@@ -20,6 +20,7 @@ interface BarqiUseCase {
     fun addAudioToFavorite(audio: Audio)
     fun removeAudioFromFavorite(idAudio: String)
     fun getFavoriteAudios(): Flowable<List<Audio>>
+    fun isAudioFavorite(idAudio: String): Flowable<Boolean>
     fun setRecentPlayedAudio(audio: Audio)
     fun getRecentPlayedAudios(): Flowable<List<Audio>>
 }
