@@ -2,6 +2,7 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.domain.usecase
 
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
+import io.reactivex.Flowable
 
 class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUseCase {
     override fun getAds() = iBarqiRepository.getAds()
@@ -16,11 +17,11 @@ class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUse
             iBarqiRepository.getAudioByIdArtist(idArtist)
 
     override fun addAudioToFavorite(audio: Audio) = iBarqiRepository.addAudioToFavorite(audio)
-    override fun removeAudioFromFavorite(idAudio: String) =
+    override fun removeAudioFromFavorite(idAudio: Long) =
             iBarqiRepository.removeAudioFromFavorite(idAudio)
 
     override fun getFavoriteAudios() = iBarqiRepository.getFavoriteAudios()
-    override fun isAudioFavorite(idAudio: String) = iBarqiRepository.isAudioFavorite(idAudio)
+    override fun isAudioFavorite(idAudio: Long) = iBarqiRepository.isAudioFavorite(idAudio)
     override fun setRecentPlayedAudio(audio: Audio) = iBarqiRepository.setRecentPlayedAudio(audio)
     override fun getRecentPlayedAudios() = iBarqiRepository.getRecentPlayedAudios()
 }

@@ -7,6 +7,7 @@ object RecentPlayedAudioMapper {
     fun mapAudioToEntity(input: Audio) =
             RecentPlayedAudioEntity(
                     idAudio = input.id,
+                    idByTimestamp = input.idByTimestamp,
                     title = input.title,
                     duration = input.duration,
                     views = input.views,
@@ -21,6 +22,7 @@ object RecentPlayedAudioMapper {
             input.map {
                 Audio(
                         id = it.idAudio,
+                        idByTimestamp = it.idByTimestamp,
                         title = it.title,
                         duration = it.duration,
                         views = it.views,

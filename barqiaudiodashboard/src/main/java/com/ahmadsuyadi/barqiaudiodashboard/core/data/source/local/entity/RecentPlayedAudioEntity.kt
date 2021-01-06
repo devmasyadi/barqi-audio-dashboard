@@ -11,7 +11,10 @@ data class RecentPlayedAudioEntity(
         @PrimaryKey(autoGenerate = true)
         @NonNull
         @ColumnInfo(name = "id")
-        val id: Int? = 0,
+        val id: Long? = 0,
+
+        @ColumnInfo(name = "idByTimestamp")
+        val idByTimestamp: Long? = 0,
 
         @ColumnInfo(name = "idAudio")
         val idAudio: String? = null,

@@ -8,6 +8,7 @@ object AudioMapper {
             input.map {
                 Audio(
                         id = it.id,
+                        idByTimestamp = it.idByTimestamp,
                         title = it.title,
                         duration = it.duration,
                         views = it.views,

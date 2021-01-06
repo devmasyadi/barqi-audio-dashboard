@@ -35,5 +35,8 @@ data class AudioResponse(
         val lastView: String? = null,
 
         @field:SerializedName("updatedAt")
-        val updatedAt: String? = null
+        val updatedAt: String? = null,
+
+        @field:SerializedName("idByTimestamp")
+        val idByTimestamp: Long? = null,
 )

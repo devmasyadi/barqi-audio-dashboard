@@ -48,5 +48,8 @@ data class AudiosItem(
         val lastView: String? = null,
 
         @field:SerializedName("lyric")
-        val lyric: String? = null
+        val lyric: String? = null,
+
+        @field:SerializedName("idByTimestamp")
+        val idByTimestamp: Long? = null,
 )
