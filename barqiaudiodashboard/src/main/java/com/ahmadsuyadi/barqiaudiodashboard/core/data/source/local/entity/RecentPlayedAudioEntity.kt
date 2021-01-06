@@ -10,7 +10,7 @@ data class RecentPlayedAudioEntity(
     @PrimaryKey
     @NonNull
     @ColumnInfo(name = "id")
-    val id: String? = null,
+    val id: String? = "0",
 
     @ColumnInfo(name = "duration")
     val duration: String? = null,
