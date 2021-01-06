@@ -7,6 +7,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.room.BarqiData
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.AppExecutors
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.ConfigBarqiAudioDashboard
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.ACCESS_TOKEN
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.HEADER_CACHE_CONTROL
@@ -97,8 +98,11 @@ val networkModule = module {
 }
 
 val repositoryModule = module {
+
     single { RemoteDataSource(get()) }
     single { LocalDataSource(get(), get()) }
+    factory { AppExecutors() }
+
     single<IBarqiRepository> {
         BarqiRepository(
                 get(),
