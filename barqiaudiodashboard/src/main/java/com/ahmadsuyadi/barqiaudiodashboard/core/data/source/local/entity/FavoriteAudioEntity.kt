@@ -7,32 +7,36 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favoriteAudio")
 data class FavoriteAudioEntity(
-    @PrimaryKey
-    @NonNull
-    @ColumnInfo(name = "id")
-    val id: String? = "0",
 
-    @ColumnInfo(name = "duration")
-    val duration: String? = null,
+        @PrimaryKey
+        @NonNull
+        @ColumnInfo(name = "id")
+        val id: Int? = null,
 
-    @ColumnInfo(name = "image")
-    val image: String? = null,
+        @ColumnInfo(name = "idAudio")
+        val idAudio: String? = null,
 
-    @ColumnInfo(name = "lyric")
-    val lyric: String? = null,
+        @ColumnInfo(name = "duration")
+        val duration: String? = null,
 
-    @ColumnInfo(name = "artist")
-    val artist: String? = null,
+        @ColumnInfo(name = "image")
+        val image: String? = null,
 
-    @ColumnInfo(name = "title")
-    val title: String? = null,
+        @ColumnInfo(name = "lyric")
+        val lyric: String? = null,
 
-    @ColumnInfo(name = "views")
-    val views: Int? = null,
+        @ColumnInfo(name = "artist")
+        val artist: String? = null,
 
-    @ColumnInfo(name = "url")
-    val url: String? = null,
+        @ColumnInfo(name = "title")
+        val title: String? = null,
 
-    @ColumnInfo(name = "last_view")
-    val lastView: String? = null,
+        @ColumnInfo(name = "views")
+        val views: Int? = null,
+
+        @ColumnInfo(name = "url")
+        val url: String? = null,
+
+        @ColumnInfo(name = "last_view")
+        val lastView: String? = null,
 )

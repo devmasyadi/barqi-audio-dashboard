@@ -23,10 +23,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class BarqiRepository(
-    private val remoteDataSource: RemoteDataSource,
-    private val localDataSource: LocalDataSource,
-    private val appExecutors: AppExecutors,
-    private val context: Context
+        private val remoteDataSource: RemoteDataSource,
+        private val localDataSource: LocalDataSource,
+        private val appExecutors: AppExecutors,
+        private val context: Context
 ) : IBarqiRepository {
     @SuppressLint("CheckResult")
     override fun getAds(): Flowable<Resource<Ads>> {
@@ -35,14 +35,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getAds(context.packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AdsMapper.mapResponseToDomain(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AdsMapper.mapResponseToDomain(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -53,14 +53,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getArtists(context.packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(ArtistMapper.mapResponsesToEntities(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(ArtistMapper.mapResponsesToEntities(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -71,23 +71,23 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getAudios(context.packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
     override fun increaseView(idAudio: String) {
         remoteDataSource.increaseView(idAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe()
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe()
     }
 
     @SuppressLint("CheckResult")
@@ -97,14 +97,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getArtistsV2(context.packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(ArtistV2Mapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(ArtistV2Mapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -115,14 +115,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getAudiosTrending(context.packageName, limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -133,14 +133,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getAudiosRecent(limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -151,14 +151,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.searchAudio(nameAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -169,14 +169,14 @@ class BarqiRepository(
             resultData.onNext(Resource.Loading())
         }
         remoteDataSource.getAudioByArtistId(idArtist)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
-            }, {
-                resultData.onNext(Resource.Error(it.handleMessageError()))
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -192,39 +192,39 @@ class BarqiRepository(
 
     override fun getFavoriteAudios(): Flowable<List<Audio>> {
         return localDataSource.getFavoriteAudios()
-            .map { FavoriteAudioMapper.mapEntitiesToAudios(it) }
+                .map { FavoriteAudioMapper.mapEntitiesToAudios(it) }
     }
 
     @SuppressLint("CheckResult")
     override fun isAudioFavorite(idAudio: String): Flowable<Boolean> {
         val resultData = PublishSubject.create<Boolean>()
         localDataSource.isFavoriteAudio(idAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe{
-                resultData.onNext(!it.isNullOrEmpty())
-            }
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe {
+                    resultData.onNext(!it.isNullOrEmpty())
+                }
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
     @SuppressLint("CheckResult")
     override fun setRecentPlayedAudio(audio: Audio) {
         localDataSource.insertRecentPlayedAudio(RecentPlayedAudioMapper.mapAudioToEntity(audio))
-            .diskIO()
+                .diskIO()
         localDataSource.getRecentPlayedAudio()
-            .doOnNext {
-                if (it.size > 10) {
-                    for (i in 9..it.size) {
-                        appExecutors.diskIO().execute {
-                            localDataSource.deleteRecentPlayedAudio(it[i])
+                .doOnNext {
+                    if (it.size > 10) {
+                        for (i in 9..it.size) {
+                            appExecutors.diskIO().execute {
+                                localDataSource.deleteRecentPlayedAudio(it[i])
+                            }
                         }
                     }
                 }
-            }
     }
 
     override fun getRecentPlayedAudios(): Flowable<List<Audio>> {
         return localDataSource.getRecentPlayedAudio()
-            .map { RecentPlayedAudioMapper.mapEntitiesToAudios(it) }
+                .map { RecentPlayedAudioMapper.mapEntitiesToAudios(it) }
     }
 }

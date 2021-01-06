@@ -32,27 +32,27 @@ val databaseModule = module {
         val passphrase: ByteArray = SQLiteDatabase.getBytes("BarqiAudioDashboard".toCharArray())
         val factory = SupportFactory(passphrase)
         Room.databaseBuilder(
-            androidContext(),
-            BarqiDatabase::class.java, "BarqiAudioDashboard.db"
+                androidContext(),
+                BarqiDatabase::class.java, "BarqiAudioDashboard.db"
         ).fallbackToDestructiveMigration()
-            .openHelperFactory(factory)
-            .build()
+                .openHelperFactory(factory)
+                .build()
     }
 }
 
 val networkModule = module {
     single {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(
-                if (androidContext().applicationInfo.flags == 0)
-                    HttpLoggingInterceptor.Level.BODY
-                else
-                    HttpLoggingInterceptor.Level.NONE
-            )
+                .setLevel(
+                        if (androidContext().applicationInfo.flags == 0)
+                            HttpLoggingInterceptor.Level.BODY
+                        else
+                            HttpLoggingInterceptor.Level.NONE
+                )
         val headerInterceptor = Interceptor {
             val request = it.request()
-                .newBuilder()
-                .addHeader(ACCESS_TOKEN, ConfigBarqiAudioDashboard.ACCESS_TOKEN).build()
+                    .newBuilder()
+                    .addHeader(ACCESS_TOKEN, ConfigBarqiAudioDashboard.ACCESS_TOKEN).build()
             it.proceed(request)
         }
 
@@ -61,14 +61,14 @@ val networkModule = module {
                 override fun intercept(chain: Interceptor.Chain): Response {
                     var request = chain.request()
                     val cacheControl = CacheControl.Builder()
-                        .maxStale(1000, TimeUnit.DAYS)
-                        .build()
+                            .maxStale(1000, TimeUnit.DAYS)
+                            .build()
                     if (!isNetworkAvailable(get())) {
                         request = request.newBuilder()
-                            .removeHeader(HEADER_PRAGMA)
-                            .removeHeader(HEADER_CACHE_CONTROL)
-                            .cacheControl(cacheControl)
-                            .build()
+                                .removeHeader(HEADER_PRAGMA)
+                                .removeHeader(HEADER_CACHE_CONTROL)
+                                .cacheControl(cacheControl)
+                                .build()
                     }
                     return chain.proceed(request)
                 }
@@ -76,21 +76,21 @@ val networkModule = module {
         }
 
         OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(headerInterceptor)
-            .addInterceptor(offlineInterceptor())
-            .connectTimeout(120, TimeUnit.SECONDS)
-            .readTimeout(120, TimeUnit.SECONDS)
-            .build()
+                .addInterceptor(httpLoggingInterceptor)
+                .addInterceptor(headerInterceptor)
+                .addInterceptor(offlineInterceptor())
+                .connectTimeout(120, TimeUnit.SECONDS)
+                .readTimeout(120, TimeUnit.SECONDS)
+                .build()
     }
 
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl(ConfigBarqiAudioDashboard.BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(get())
-            .build()
+                .baseUrl(ConfigBarqiAudioDashboard.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .client(get())
+                .build()
         retrofit.create(ApiService::class.java)
     }
 }
@@ -99,10 +99,10 @@ val repositoryModule = module {
     single { RemoteDataSource(get()) }
     single<IBarqiRepository> {
         BarqiRepository(
-            get(),
-            get(),
-            get(),
-            get()
+                get(),
+                get(),
+                get(),
+                get()
         )
     }
 }

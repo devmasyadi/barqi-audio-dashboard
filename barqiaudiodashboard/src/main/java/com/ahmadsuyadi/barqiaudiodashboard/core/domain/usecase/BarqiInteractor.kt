@@ -13,11 +13,11 @@ class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUse
     override fun getAudiosRecent(limit: Int?) = iBarqiRepository.getAudiosRecent(limit)
     override fun searchAudio(nameAudio: String) = iBarqiRepository.searchAudio(nameAudio)
     override fun getAudioByIdArtist(idArtist: String) =
-        iBarqiRepository.getAudioByIdArtist(idArtist)
+            iBarqiRepository.getAudioByIdArtist(idArtist)
 
     override fun addAudioToFavorite(audio: Audio) = iBarqiRepository.addAudioToFavorite(audio)
     override fun removeAudioFromFavorite(idAudio: String) =
-        iBarqiRepository.removeAudioFromFavorite(idAudio)
+            iBarqiRepository.removeAudioFromFavorite(idAudio)
 
     override fun getFavoriteAudios() = iBarqiRepository.getFavoriteAudios()
     override fun isAudioFavorite(idAudio: String) = iBarqiRepository.isAudioFavorite(idAudio)

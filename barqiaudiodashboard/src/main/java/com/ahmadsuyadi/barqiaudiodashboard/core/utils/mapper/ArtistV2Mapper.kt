@@ -6,25 +6,25 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.AudiosItem
 
 object ArtistV2Mapper {
     fun mapResponsesToDomains(input: List<ArtistV2Response>) =
-        input.map {
-            ArtisV2(
-                id = it.id,
-                image = it.image,
-                name = it.name,
-                totalAudio = it.totalAudio,
-                audios = it.audios?.map { item ->
-                    AudiosItem(
-                        id = item?.id,
-                        title = item?.title,
-                        duration = item?.duration,
-                        views = item?.views,
-                        lyric = item?.lyric,
-                        url = item?.url,
-                        artist = item?.artist,
-                        lastView = item?.lastView,
-                        image = item?.image
-                    )
-                }
-            )
-        }
+            input.map {
+                ArtisV2(
+                        id = it.id,
+                        image = it.image,
+                        name = it.name,
+                        totalAudio = it.totalAudio,
+                        audios = it.audios?.map { item ->
+                            AudiosItem(
+                                    id = item?.id,
+                                    title = item?.title,
+                                    duration = item?.duration,
+                                    views = item?.views,
+                                    lyric = item?.lyric,
+                                    url = item?.url,
+                                    artist = item?.artist,
+                                    lastView = item?.lastView,
+                                    image = item?.image
+                            )
+                        }
+                )
+            }
 }
