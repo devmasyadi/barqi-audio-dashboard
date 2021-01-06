@@ -8,10 +8,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favoriteAudio")
 data class FavoriteAudioEntity(
 
-        @PrimaryKey
+        @PrimaryKey(autoGenerate = true)
         @NonNull
         @ColumnInfo(name = "id")
-        val id: Int? = null,
+        val id: Int? = 0,
 
         @ColumnInfo(name = "idAudio")
         val idAudio: String? = null,
