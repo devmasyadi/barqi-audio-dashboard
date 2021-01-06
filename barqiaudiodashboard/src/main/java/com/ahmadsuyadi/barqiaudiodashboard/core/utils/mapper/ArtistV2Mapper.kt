@@ -15,6 +15,7 @@ object ArtistV2Mapper {
                         audios = it.audios?.map { item ->
                             AudiosItem(
                                     id = item?.id,
+                                    idByTimestamp = item?.idByTimestamp,
                                     title = item?.title,
                                     duration = item?.duration,
                                     views = item?.views,

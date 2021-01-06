@@ -10,6 +10,7 @@ data class ArtisV2(
 
 data class AudiosItem(
         val id: String? = null,
+        val idByTimestamp: Long? = null,
         val duration: String? = null,
         val image: String? = null,
         val artist: String? = null,
