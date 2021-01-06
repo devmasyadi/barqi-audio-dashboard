@@ -145,6 +145,24 @@ class BarqiRepository(
     }
 
     @SuppressLint("CheckResult")
+    override fun getLatestUpload(limit: Int?): Flowable<Resource<List<Audio>>> {
+        val resultData = PublishSubject.create<Resource<List<Audio>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.getAudiosTrending(context.packageName, limit)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+                }, {
+                    resultData.onNext(Resource.Error(it.handleMessageError()))
+                })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
     override fun searchAudio(nameAudio: String): Flowable<Resource<List<Audio>>> {
         val resultData = PublishSubject.create<Resource<List<Audio>>>()
         GlobalScope.launch(Dispatchers.Main) {

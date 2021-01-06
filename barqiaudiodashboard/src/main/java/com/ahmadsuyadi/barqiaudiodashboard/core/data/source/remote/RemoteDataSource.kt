@@ -108,6 +108,21 @@ class RemoteDataSource(
     }
 
     @SuppressLint("CheckResult")
+    fun getLatestUpload(packageName: String, limit: Int?): Flowable<List<AudioResponse>> {
+        val resultData = PublishSubject.create<List<AudioResponse>>()
+        apiService.getLatestUpload(packageName, limit)
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
     fun getAudiosRecent(limit: Int?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getAudiosRecent(limit)

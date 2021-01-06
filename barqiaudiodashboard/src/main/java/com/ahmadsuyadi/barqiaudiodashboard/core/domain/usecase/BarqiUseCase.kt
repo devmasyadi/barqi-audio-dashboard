@@ -14,7 +14,8 @@ interface BarqiUseCase {
     fun increaseView(idAudio: String)
     fun getArtistsV2(): Flowable<Resource<List<ArtisV2>>>
     fun getAudiosTrending(limit: Int?): Flowable<Resource<List<Audio>>>
-    fun getAudiosRecent(limit: Int?): Flowable<Resource<List<Audio>>>
+    fun getAudiosRecent(limit: Int? = 0): Flowable<Resource<List<Audio>>>
+    fun getLatestUpload(limit: Int? = 0): Flowable<Resource<List<Audio>>>
     fun searchAudio(nameAudio: String): Flowable<Resource<List<Audio>>>
     fun getAudioByIdArtist(idArtist: String): Flowable<Resource<List<Audio>>>
     fun addAudioToFavorite(audio: Audio)
