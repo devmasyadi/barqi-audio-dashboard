@@ -2,6 +2,7 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.di
 
 import androidx.room.Room
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.BarqiRepository
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.room.BarqiDatabase
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
@@ -97,6 +98,7 @@ val networkModule = module {
 
 val repositoryModule = module {
     single { RemoteDataSource(get()) }
+    single { LocalDataSource(get(), get()) }
     single<IBarqiRepository> {
         BarqiRepository(
                 get(),
