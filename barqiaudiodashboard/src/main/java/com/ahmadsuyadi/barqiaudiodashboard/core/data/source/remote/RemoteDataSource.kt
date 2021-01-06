@@ -122,4 +122,34 @@ class RemoteDataSource(
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
+    @SuppressLint("CheckResult")
+    fun searchAudio(nameAudio: String?): Flowable<List<AudioResponse>> {
+        val resultData = PublishSubject.create<List<AudioResponse>>()
+        apiService.searchAudio(nameAudio)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(it)
+            }, {
+                resultData.onError(it)
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    fun getAudioByArtistId(artistId: String?): Flowable<List<AudioResponse>> {
+        val resultData = PublishSubject.create<List<AudioResponse>>()
+        apiService.getByArtistID(artistId)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(it)
+            }, {
+                resultData.onError(it)
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
 }

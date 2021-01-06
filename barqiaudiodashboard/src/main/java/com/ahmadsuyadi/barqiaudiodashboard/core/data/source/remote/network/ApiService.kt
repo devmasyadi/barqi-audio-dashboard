@@ -47,5 +47,14 @@ interface ApiService {
         @Query("limit") limit: Int? = 0
     ): Flowable<List<AudioResponse>>
 
+    @GET("api/musics/search")
+    fun searchAudio(
+        @Query("nameAudio") nameAudio: String? = null
+    ): Flowable<List<AudioResponse>>
+
+    @GET("api/musics/byArtistId")
+    fun getByArtistID(
+        @Query("artistId") artistID: String? = null
+    ): Flowable<List<AudioResponse>>
 
 }

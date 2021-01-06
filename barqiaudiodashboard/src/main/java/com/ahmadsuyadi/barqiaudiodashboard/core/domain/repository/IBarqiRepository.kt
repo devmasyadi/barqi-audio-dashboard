@@ -15,4 +15,11 @@ interface IBarqiRepository {
     fun getArtistsV2(): Flowable<Resource<List<ArtisV2>>>
     fun getAudiosTrending(limit: Int?): Flowable<Resource<List<Audio>>>
     fun getAudiosRecent(limit: Int?): Flowable<Resource<List<Audio>>>
+    fun searchAudio(nameAudio: String): Flowable<Resource<List<Audio>>>
+    fun getAudioByIdArtist(idArtist: String): Flowable<Resource<List<Audio>>>
+    fun addAudioToFavorite(audio: Audio)
+    fun removeAudioFromFavorite(idAudio: String)
+    fun getFavoriteAudios(): Flowable<List<Audio>>
+    fun setRecentPlayedAudio(audio: Audio)
+    fun getRecentPlayedAudios(): Flowable<List<Audio>>
 }

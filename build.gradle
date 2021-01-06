@@ -10,6 +10,9 @@ buildscript {
         lifecycle_version = '2.2.0'
         koin_version = '2.1.5'
         retrofit_version = '2.9.0'
+        sqlcipher_version = '4.4.0'
+        sqlite_version = '2.1.0'
+        room_version = '2.2.6'
     }
     repositories {
         google()

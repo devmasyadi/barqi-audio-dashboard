@@ -2,17 +2,17 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.data
 
 import android.annotation.SuppressLint
 import android.content.Context
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Ads
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.ArtisV2
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Artist
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.AppExecutors
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.diskIO
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.handleMessageError
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.AdsMapper
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.ArtistMapper
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.ArtistV2Mapper
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.AudioMapper
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -24,8 +24,10 @@ import kotlinx.coroutines.launch
 
 class BarqiRepository(
     private val remoteDataSource: RemoteDataSource,
+    private val localDataSource: LocalDataSource,
+    private val appExecutors: AppExecutors,
     private val context: Context
-): IBarqiRepository {
+) : IBarqiRepository {
     @SuppressLint("CheckResult")
     override fun getAds(): Flowable<Resource<Ads>> {
         val resultData = PublishSubject.create<Resource<Ads>>()
@@ -140,5 +142,77 @@ class BarqiRepository(
                 resultData.onNext(Resource.Error(it.handleMessageError()))
             })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun searchAudio(nameAudio: String): Flowable<Resource<List<Audio>>> {
+        val resultData = PublishSubject.create<Resource<List<Audio>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.searchAudio(nameAudio)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+            }, {
+                resultData.onNext(Resource.Error(it.handleMessageError()))
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    @SuppressLint("CheckResult")
+    override fun getAudioByIdArtist(idArtist: String): Flowable<Resource<List<Audio>>> {
+        val resultData = PublishSubject.create<Resource<List<Audio>>>()
+        GlobalScope.launch(Dispatchers.Main) {
+            resultData.onNext(Resource.Loading())
+        }
+        remoteDataSource.getAudioByArtistId(idArtist)
+            .subscribeOn(Schedulers.computation())
+            .observeOn(AndroidSchedulers.mainThread())
+            .take(1)
+            .subscribe({
+                resultData.onNext(Resource.Success(AudioMapper.mapResponsesToDomains(it)))
+            }, {
+                resultData.onNext(Resource.Error(it.handleMessageError()))
+            })
+        return resultData.toFlowable(BackpressureStrategy.BUFFER)
+    }
+
+    override fun addAudioToFavorite(audio: Audio) {
+        localDataSource.insertFavoriteAudio(FavoriteAudioMapper.mapAudioToEntity(audio)).diskIO()
+    }
+
+    override fun removeAudioFromFavorite(idAudio: String) {
+        appExecutors.diskIO().execute {
+            localDataSource.deleteFavoriteAudioById(idAudio)
+        }
+    }
+
+    override fun getFavoriteAudios(): Flowable<List<Audio>> {
+        return localDataSource.getFavoriteAudios()
+            .map { FavoriteAudioMapper.mapEntitiesToAudios(it) }
+    }
+
+    @SuppressLint("CheckResult")
+    override fun setRecentPlayedAudio(audio: Audio) {
+        localDataSource.insertRecentPlayedAudio(RecentPlayedAudioMapper.mapAudioToEntity(audio))
+            .diskIO()
+        localDataSource.getRecentPlayedAudio()
+            .doOnNext {
+                if (it.size > 10) {
+                    for (i in 9..it.size) {
+                        appExecutors.diskIO().execute {
+                            localDataSource.deleteRecentPlayedAudio(it[i])
+                        }
+                    }
+                }
+            }
+    }
+
+    override fun getRecentPlayedAudios(): Flowable<List<Audio>> {
+        return localDataSource.getRecentPlayedAudio()
+            .map { RecentPlayedAudioMapper.mapEntitiesToAudios(it) }
     }
 }
