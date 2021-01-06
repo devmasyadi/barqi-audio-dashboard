@@ -14,12 +14,13 @@ interface FavoriteAudioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavoriteAudio(audioEntity: FavoriteAudioEntity): Completable
 
-    @Query("DELETE FROM favoriteAudio WHERE _id = :idFavoriteAudio")
+    @Query("DELETE FROM favoriteAudio WHERE id = :idFavoriteAudio")
     fun deleteFavoriteAudioById(idFavoriteAudio: String)
 
     @Query("SELECT * FROM favoriteAudio")
     fun getFavoriteAudios(): Flowable<List<FavoriteAudioEntity>>
 
+    @Query("SELECT * FROM favoriteAudio WHERE id = :idAudio")
     fun isFavorite(idAudio: String): Flowable<List<FavoriteAudioEntity>>
 
 }

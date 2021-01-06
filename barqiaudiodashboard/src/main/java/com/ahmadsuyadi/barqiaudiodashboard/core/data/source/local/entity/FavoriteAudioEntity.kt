@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
 data class FavoriteAudioEntity(
     @PrimaryKey
     @NonNull
-    @ColumnInfo(name = "_id")
+    @ColumnInfo(name = "id")
     val id: String? = null,
 
     @ColumnInfo(name = "duration")
