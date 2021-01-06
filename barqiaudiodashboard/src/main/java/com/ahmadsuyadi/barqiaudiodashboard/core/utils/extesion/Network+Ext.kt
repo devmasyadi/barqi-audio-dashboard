@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion
 
 import android.content.Context

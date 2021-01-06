@@ -18,9 +18,9 @@ interface IBarqiRepository {
     fun searchAudio(nameAudio: String): Flowable<Resource<List<Audio>>>
     fun getAudioByIdArtist(idArtist: String): Flowable<Resource<List<Audio>>>
     fun addAudioToFavorite(audio: Audio)
-    fun removeAudioFromFavorite(idAudio: Long)
+    fun removeAudioFromFavorite(idAudio: String)
     fun getFavoriteAudios(): Flowable<List<Audio>>
-    fun isAudioFavorite(idAudio: Long): Flowable<Boolean>
+    fun isAudioFavorite(idAudio: String): Flowable<Boolean>
     fun setRecentPlayedAudio(audio: Audio)
     fun getRecentPlayedAudios(): Flowable<List<Audio>>
 }
