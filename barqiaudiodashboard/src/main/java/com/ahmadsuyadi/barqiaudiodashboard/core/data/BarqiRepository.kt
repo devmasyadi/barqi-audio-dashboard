@@ -150,7 +150,7 @@ class BarqiRepository(
         GlobalScope.launch(Dispatchers.Main) {
             resultData.onNext(Resource.Loading())
         }
-        remoteDataSource.getAudiosTrending(context.packageName, limit)
+        remoteDataSource.getLatestUpload(context.packageName, limit)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .take(1)
