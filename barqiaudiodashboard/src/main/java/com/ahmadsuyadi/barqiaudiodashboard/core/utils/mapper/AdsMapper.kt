@@ -25,8 +25,7 @@ object AdsMapper {
                     startAppId = input.startAppId,
                     intervalInt = input.intervalInt,
                     isOnRedirect = input.isOnRedirect,
-                    urlRedirect = input.urlRedirect,
-                    urlMoreApp = input.urlMoreApp,
-                    privacyPolicyApp = input.privacyPolicyApp,
+                    appLovinInter = input.appLovinInter,
+                    appLovinBanner = input.appLovinBanner
             )
 }

@@ -16,14 +16,8 @@ data class AdsResponse(
         @field:SerializedName("unityGameID")
         val unityGameID: String? = null,
 
-        @field:SerializedName("createdAt")
-        val createdAt: String? = null,
-
         @field:SerializedName("isTestAds")
         val isTestAds: Boolean? = null,
-
-        @field:SerializedName("urlRedirect")
-        val urlRedirect: String? = null,
 
         @field:SerializedName("packageName")
         val packageName: String? = null,
@@ -82,6 +76,9 @@ data class AdsResponse(
         @field:SerializedName("unityInter")
         val unityInter: String? = null,
 
-        @field:SerializedName("privacyPolicyApp")
-        val privacyPolicyApp: String? = null
+        @field:SerializedName("appLovinInter")
+        val appLovinInter: String? = null,
+
+        @field:SerializedName("appLovinBanner")
+        val appLovinBanner: String? = null
 )

@@ -41,5 +41,5 @@ data class RecentPlayedAudioEntity(
         val url: String? = null,
 
         @ColumnInfo(name = "last_view")
-        val lastView: String? = null,
+        val lastView: String? = null
 )

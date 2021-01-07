@@ -7,7 +7,6 @@ data class Ads(
         val unityGameID: String? = null,
         val createdAt: String? = null,
         val isTestAds: Boolean? = null,
-        val urlRedirect: String? = null,
         val packageName: String? = null,
         val idRewardAdmob: String? = null,
         val updatedAt: String? = null,
@@ -21,12 +20,12 @@ data class Ads(
         val modeAds: Int? = null,
         val fanBanner: String? = null,
         val idNativeAdmob: String? = null,
-        val urlMoreApp: String? = null,
         val mopubBanner: String? = null,
         val name: String? = null,
         val idIntAdmob: String? = null,
         val id: String? = null,
         val unityInter: String? = null,
-        val privacyPolicyApp: String? = null
+        val appLovinInter: String? = null,
+        val appLovinBanner: String? = null,
 )
 
