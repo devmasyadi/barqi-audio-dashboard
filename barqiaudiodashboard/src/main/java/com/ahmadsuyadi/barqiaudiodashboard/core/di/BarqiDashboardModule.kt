@@ -15,10 +15,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.HEADER_PRAGMA
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.isNetworkAvailable
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import okhttp3.CacheControl
-import okhttp3.Interceptor
-import okhttp3.OkHttpClient
-import okhttp3.Response
+import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
@@ -78,6 +75,7 @@ val networkModule = module {
         }
 
         OkHttpClient.Builder()
+                .cache(Cache(androidContext().cacheDir, 50 * 1024 * 1024))
                 .addInterceptor(httpLoggingInterceptor)
                 .addInterceptor(headerInterceptor)
                 .addInterceptor(offlineInterceptor())
