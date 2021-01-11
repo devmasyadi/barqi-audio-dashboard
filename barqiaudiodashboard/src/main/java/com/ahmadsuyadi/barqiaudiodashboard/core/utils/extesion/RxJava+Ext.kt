@@ -6,6 +6,6 @@ import io.reactivex.schedulers.Schedulers
 
 fun Completable.diskIO() {
     subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe()
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe()
 }

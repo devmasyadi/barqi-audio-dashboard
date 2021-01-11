@@ -5,29 +5,29 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.InfoApp
 
 object InfoAppMapper {
     fun mapResponseToDomain(input: InfoAppResponse) =
-            InfoApp(
-                    isShowAds = input.isShowAds,
-                    isTestAds = input.isTestAds,
-                    isShowImageAudio = input.isShowImageAudio,
-                    modeAds = input.modeAds,
-                    idBannerAdmob = input.idBannerAdmob,
-                    idIntAdmob = input.idIntAdmob,
-                    idNativeAdmob = input.idNativeAdmob,
-                    idRewardAdmob = input.idRewardAdmob,
-                    openIdAdmob = input.openIdAdmob,
-                    unityGameID = input.unityGameID,
-                    unityBanner = input.unityBanner,
-                    unityInter = input.unityInter,
-                    fanBanner = input.fanBanner,
-                    fanInter = input.fanInter,
-                    mopubBanner = input.mopubBanner,
-                    mopubInter = input.mopubInter,
-                    startAppId = input.startAppId,
-                    intervalInt = input.intervalInt,
-                    isOnRedirect = input.isOnRedirect,
-                    appLovinInter = input.appLovinInter,
-                    appLovinBanner = input.appLovinBanner,
-                    urlMoreApp = input.urlMoreApp,
-                    privacyPolicyApp = input.privacyPolicyApp
-            )
+        InfoApp(
+            isShowAds = input.isShowAds,
+            isTestAds = input.isTestAds,
+            isShowImageAudio = input.isShowImageAudio,
+            modeAds = input.modeAds,
+            idBannerAdmob = input.idBannerAdmob,
+            idIntAdmob = input.idIntAdmob,
+            idNativeAdmob = input.idNativeAdmob,
+            idRewardAdmob = input.idRewardAdmob,
+            openIdAdmob = input.openIdAdmob,
+            unityGameID = input.unityGameID,
+            unityBanner = input.unityBanner,
+            unityInter = input.unityInter,
+            fanBanner = input.fanBanner,
+            fanInter = input.fanInter,
+            mopubBanner = input.mopubBanner,
+            mopubInter = input.mopubInter,
+            startAppId = input.startAppId,
+            intervalInt = input.intervalInt,
+            isOnRedirect = input.isOnRedirect,
+            appLovinInter = input.appLovinInter,
+            appLovinBanner = input.appLovinBanner,
+            urlMoreApp = input.urlMoreApp,
+            privacyPolicyApp = input.privacyPolicyApp
+        )
 }

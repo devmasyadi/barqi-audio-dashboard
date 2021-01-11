@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="update_info">Update Info</string>
+    <string name="msg_success_update">Restart to update</string>
+    <string name="update_success">Update Success</string>
+    <string name="later">LATER</string>
+    <string name="update">UPDATE</string>
+    <string name="no">NO</string>
+    <string name="ok">OK</string>
+    <string name="msg_update_redirect"><![CDATA[A new version is available %s please update the application for better performance ]]></string>
+</resources>
