@@ -7,5 +7,5 @@
     <string name="update">UPDATE</string>
     <string name="no">NO</string>
     <string name="ok">OK</string>
-    <string name="msg_update_redirect"><![CDATA[A new version is available %s please update the application for better performance ]]></string>
+    <string name="msg_update_redirect"><![CDATA[A <b>new version</b> this app is available, please update the application for better performance ]]></string>
 </resources>
