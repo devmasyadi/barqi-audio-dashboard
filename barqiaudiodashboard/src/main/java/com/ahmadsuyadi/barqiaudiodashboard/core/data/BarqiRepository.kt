@@ -4,10 +4,10 @@ import android.annotation.SuppressLint
 import android.content.Context
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
-import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Ads
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.ArtisV2
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Artist
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.InfoApp
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.AppExecutors
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.diskIO
@@ -29,17 +29,17 @@ class BarqiRepository(
         private val context: Context
 ) : IBarqiRepository {
     @SuppressLint("CheckResult")
-    override fun getAds(): Flowable<Resource<Ads>> {
-        val resultData = PublishSubject.create<Resource<Ads>>()
+    override fun getInfoApp(): Flowable<Resource<InfoApp>> {
+        val resultData = PublishSubject.create<Resource<InfoApp>>()
         GlobalScope.launch(Dispatchers.Main) {
             resultData.onNext(Resource.Loading())
         }
-        remoteDataSource.getAds(context.packageName)
+        remoteDataSource.getInfoApp(context.packageName)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .take(1)
                 .subscribe({
-                    resultData.onNext(Resource.Success(AdsMapper.mapResponseToDomain(it)))
+                    resultData.onNext(Resource.Success(InfoAppMapper.mapResponseToDomain(it)))
                 }, {
                     resultData.onNext(Resource.Error(it.handleMessageError()))
                 })

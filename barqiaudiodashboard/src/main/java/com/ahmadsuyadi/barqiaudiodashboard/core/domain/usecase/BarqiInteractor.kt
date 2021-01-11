@@ -5,7 +5,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiReposito
 import io.reactivex.Flowable
 
 class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUseCase {
-    override fun getAds() = iBarqiRepository.getAds()
+    override fun getInfoApp() = iBarqiRepository.getInfoApp()
     override fun getArtists() = iBarqiRepository.getArtists()
     override fun getAudios() = iBarqiRepository.getAudios()
     override fun increaseView(idAudio: String) = iBarqiRepository.increaseView(idAudio)

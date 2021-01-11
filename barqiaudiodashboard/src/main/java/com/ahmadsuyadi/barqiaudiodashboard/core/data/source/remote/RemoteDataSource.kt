@@ -2,10 +2,10 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote
 
 import android.annotation.SuppressLint
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AdsResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistV2Response
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -18,9 +18,9 @@ class RemoteDataSource(
 ) {
 
     @SuppressLint("CheckResult")
-    fun getAds(packageName: String): Flowable<AdsResponse> {
-        val resultData = PublishSubject.create<AdsResponse>()
-        apiService.getAds(packageName)
+    fun getInfoApp(packageName: String): Flowable<InfoAppResponse> {
+        val resultData = PublishSubject.create<InfoAppResponse>()
+        apiService.getInfoApp(packageName)
                 .subscribeOn(Schedulers.computation())
                 .observeOn(AndroidSchedulers.mainThread())
                 .take(1)

@@ -1,9 +1,9 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network
 
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AdsResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistV2Response
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
 import io.reactivex.Flowable
 import okhttp3.ResponseBody
 import retrofit2.http.GET
@@ -12,9 +12,9 @@ import retrofit2.http.Query
 
 interface ApiService {
     @GET("api/apps/ads")
-    fun getAds(
+    fun getInfoApp(
             @Query("packageName") packageName: String
-    ): Flowable<AdsResponse>
+    ): Flowable<InfoAppResponse>
 
     @GET("api/apps/artist")
     fun getArtists(

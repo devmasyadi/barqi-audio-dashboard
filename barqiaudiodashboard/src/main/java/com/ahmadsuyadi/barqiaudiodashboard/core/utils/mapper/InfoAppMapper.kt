@@ -1,11 +1,11 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper
 
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AdsResponse
-import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Ads
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.InfoApp
 
-object AdsMapper {
-    fun mapResponseToDomain(input: AdsResponse) =
-            Ads(
+object InfoAppMapper {
+    fun mapResponseToDomain(input: InfoAppResponse) =
+            InfoApp(
                     isShowAds = input.isShowAds,
                     isTestAds = input.isTestAds,
                     isShowImageAudio = input.isShowImageAudio,
@@ -26,6 +26,8 @@ object AdsMapper {
                     intervalInt = input.intervalInt,
                     isOnRedirect = input.isOnRedirect,
                     appLovinInter = input.appLovinInter,
-                    appLovinBanner = input.appLovinBanner
+                    appLovinBanner = input.appLovinBanner,
+                    urlMoreApp = input.urlMoreApp,
+                    privacyPolicyApp = input.privacyPolicyApp
             )
 }
