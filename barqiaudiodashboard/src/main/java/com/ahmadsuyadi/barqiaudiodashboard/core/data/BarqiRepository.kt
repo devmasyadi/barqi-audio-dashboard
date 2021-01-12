@@ -83,13 +83,15 @@ class BarqiRepository(
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
-    override fun increaseView(idAudio: String) {
+    override fun increaseView(idAudio: String?) {
         if (isNetworkAvailable(context)) {
-            remoteDataSource.increaseView(idAudio)
-                    .subscribeOn(Schedulers.computation())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .take(1)
-                    .subscribe()
+            idAudio?.let {
+                remoteDataSource.increaseView(it)
+                        .subscribeOn(Schedulers.computation())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .take(1)
+                        .subscribe()
+            }
         }
     }
 
