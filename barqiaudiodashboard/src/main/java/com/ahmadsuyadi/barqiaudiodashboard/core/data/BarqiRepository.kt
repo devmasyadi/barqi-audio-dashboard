@@ -12,6 +12,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiReposito
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.AppExecutors
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.diskIO
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.handleMessageError
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.isNetworkAvailable
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.*
 import io.reactivex.BackpressureStrategy
 import io.reactivex.Flowable
@@ -83,11 +84,13 @@ class BarqiRepository(
     }
 
     override fun increaseView(idAudio: String) {
-        remoteDataSource.increaseView(idAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe()
+        if (isNetworkAvailable(context)) {
+            remoteDataSource.increaseView(idAudio)
+                    .subscribeOn(Schedulers.computation())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .take(1)
+                    .subscribe()
+        }
     }
 
     @SuppressLint("CheckResult")
