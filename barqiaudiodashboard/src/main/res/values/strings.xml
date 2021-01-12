@@ -5,7 +5,5 @@
     <string name="update_success">Update Success</string>
     <string name="later">LATER</string>
     <string name="update">UPDATE</string>
-    <string name="no">NO</string>
-    <string name="ok">OK</string>
     <string name="msg_update_redirect"><![CDATA[A <b>new version</b> this app is available, please update the application for better performance ]]></string>
 </resources>
