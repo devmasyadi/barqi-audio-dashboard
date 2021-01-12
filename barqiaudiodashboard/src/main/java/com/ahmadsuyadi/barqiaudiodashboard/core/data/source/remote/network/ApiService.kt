@@ -11,7 +11,7 @@ import retrofit2.http.PATCH
 import retrofit2.http.Query
 
 interface ApiService {
-    @GET("api/apps/ads")
+    @GET("api/apps/info")
     fun getInfoApp(
         @Query("packageName") packageName: String
     ): Flowable<InfoAppResponse>
