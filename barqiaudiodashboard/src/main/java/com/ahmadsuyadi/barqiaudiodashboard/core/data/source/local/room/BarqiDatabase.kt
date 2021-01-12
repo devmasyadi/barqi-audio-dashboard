@@ -6,10 +6,10 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.Favorit
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.RecentPlayedAudioEntity
 
 @Database(
-    entities = [
-        FavoriteAudioEntity::class,
-        RecentPlayedAudioEntity::class
-    ], version = 1, exportSchema = false
+        entities = [
+            FavoriteAudioEntity::class,
+            RecentPlayedAudioEntity::class
+        ], version = 1, exportSchema = false
 )
 abstract class BarqiDatabase : RoomDatabase() {
     abstract fun favoriteAudioDao(): FavoriteAudioDao

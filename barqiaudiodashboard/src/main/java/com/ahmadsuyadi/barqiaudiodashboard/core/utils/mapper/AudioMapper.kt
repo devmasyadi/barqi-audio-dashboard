@@ -5,18 +5,18 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 
 object AudioMapper {
     fun mapResponsesToDomains(input: List<AudioResponse>) =
-        input.map {
-            Audio(
-                id = it.id,
-                idByTimestamp = it.idByTimestamp,
-                title = it.title,
-                duration = it.duration,
-                views = it.views,
-                lyric = it.lyric,
-                url = it.url,
-                artist = it.artist,
-                lastView = it.lastView,
-                image = it.image
-            )
-        }
+            input.map {
+                Audio(
+                        id = it.id,
+                        idByTimestamp = it.idByTimestamp,
+                        title = it.title,
+                        duration = it.duration,
+                        views = it.views,
+                        lyric = it.lyric,
+                        url = it.url,
+                        artist = it.artist,
+                        lastView = it.lastView,
+                        image = it.image
+                )
+            }
 }

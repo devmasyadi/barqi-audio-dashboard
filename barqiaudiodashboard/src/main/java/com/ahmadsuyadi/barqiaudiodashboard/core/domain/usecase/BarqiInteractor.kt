@@ -15,15 +15,15 @@ class BarqiInteractor(private val iBarqiRepository: IBarqiRepository) : BarqiUse
     override fun getLatestUpload(limit: Int?) = iBarqiRepository.getLatestUpload(limit)
     override fun searchAudio(nameAudio: String) = iBarqiRepository.searchAudio(nameAudio)
     override fun getAudioByIdArtist(idArtist: String) =
-        iBarqiRepository.getAudioByIdArtist(idArtist)
+            iBarqiRepository.getAudioByIdArtist(idArtist)
 
     override fun addAudioToFavorite(audio: Audio) = iBarqiRepository.addAudioToFavorite(audio)
     override fun removeAudioFromFavorite(idAudio: String) =
-        iBarqiRepository.removeAudioFromFavorite(idAudio)
+            iBarqiRepository.removeAudioFromFavorite(idAudio)
 
     override fun getFavoriteAudios() = iBarqiRepository.getFavoriteAudios()
     override fun isAudioFavorite(idAudio: String): Flowable<Boolean> =
-        iBarqiRepository.isAudioFavorite(idAudio)
+            iBarqiRepository.isAudioFavorite(idAudio)
 
     override fun setRecentPlayedAudio(audio: Audio) = iBarqiRepository.setRecentPlayedAudio(audio)
     override fun getRecentPlayedAudios() = iBarqiRepository.getRecentPlayedAudios()

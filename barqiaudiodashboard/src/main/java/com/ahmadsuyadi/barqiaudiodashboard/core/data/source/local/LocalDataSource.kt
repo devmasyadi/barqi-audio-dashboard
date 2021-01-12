@@ -6,24 +6,24 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.room.FavoriteA
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.room.RecentPlayedAudioDao
 
 class LocalDataSource(
-    private val favoriteAudioDao: FavoriteAudioDao,
-    private val recentPlayedAudioDao: RecentPlayedAudioDao
+        private val favoriteAudioDao: FavoriteAudioDao,
+        private val recentPlayedAudioDao: RecentPlayedAudioDao
 ) {
 
     fun insertFavoriteAudio(audioEntity: FavoriteAudioEntity) =
-        favoriteAudioDao.insertFavoriteAudio(audioEntity)
+            favoriteAudioDao.insertFavoriteAudio(audioEntity)
 
     fun deleteFavoriteAudioById(idFavoriteAudio: String) =
-        favoriteAudioDao.deleteFavoriteAudioById(idFavoriteAudio)
+            favoriteAudioDao.deleteFavoriteAudioById(idFavoriteAudio)
 
     fun getFavoriteAudios() = favoriteAudioDao.getFavoriteAudios()
     fun isFavoriteAudio(idAudio: String) = favoriteAudioDao.isFavorite(idAudio)
 
     fun insertRecentPlayedAudio(recentPlayedAudioEntity: RecentPlayedAudioEntity) =
-        recentPlayedAudioDao.insertRecentPlayedAudio(recentPlayedAudioEntity)
+            recentPlayedAudioDao.insertRecentPlayedAudio(recentPlayedAudioEntity)
 
     fun deleteRecentPlayedAudio(recentPlayedAudioEntity: RecentPlayedAudioEntity) =
-        recentPlayedAudioDao.deleteRecentPlayedAudio(recentPlayedAudioEntity)
+            recentPlayedAudioDao.deleteRecentPlayedAudio(recentPlayedAudioEntity)
 
     fun getRecentPlayedAudio() = recentPlayedAudioDao.getRecentPlayedAudio()
 

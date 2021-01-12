@@ -14,21 +14,21 @@ import io.reactivex.subjects.PublishSubject
 import okhttp3.ResponseBody
 
 class RemoteDataSource(
-    private val apiService: ApiService
+        private val apiService: ApiService
 ) {
 
     @SuppressLint("CheckResult")
     fun getInfoApp(packageName: String): Flowable<InfoAppResponse> {
         val resultData = PublishSubject.create<InfoAppResponse>()
         apiService.getInfoApp(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -36,14 +36,14 @@ class RemoteDataSource(
     fun getArtists(packageName: String): Flowable<List<ArtistResponse>> {
         val resultData = PublishSubject.create<List<ArtistResponse>>()
         apiService.getArtists(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -51,14 +51,14 @@ class RemoteDataSource(
     fun getAudios(packageName: String): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getAudios(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -66,14 +66,14 @@ class RemoteDataSource(
     fun increaseView(idAudio: String): Flowable<ResponseBody> {
         val resultData = PublishSubject.create<ResponseBody>()
         apiService.increaseView(idAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -81,14 +81,14 @@ class RemoteDataSource(
     fun getArtistsV2(packageName: String): Flowable<List<ArtistV2Response>> {
         val resultData = PublishSubject.create<List<ArtistV2Response>>()
         apiService.getArtistsV2(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -96,14 +96,14 @@ class RemoteDataSource(
     fun getAudiosTrending(packageName: String, limit: Int?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getAudiosTrending(packageName, limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -111,14 +111,14 @@ class RemoteDataSource(
     fun getLatestUpload(packageName: String, limit: Int?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getLatestUpload(packageName, limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -126,14 +126,14 @@ class RemoteDataSource(
     fun getAudiosRecent(limit: Int?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getAudiosRecent(limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -141,14 +141,14 @@ class RemoteDataSource(
     fun searchAudio(nameAudio: String?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.searchAudio(nameAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 
@@ -156,14 +156,14 @@ class RemoteDataSource(
     fun getAudioByArtistId(artistId: String?): Flowable<List<AudioResponse>> {
         val resultData = PublishSubject.create<List<AudioResponse>>()
         apiService.getByArtistID(artistId)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
+                .subscribeOn(Schedulers.computation())
+                .observeOn(AndroidSchedulers.mainThread())
+                .take(1)
+                .subscribe({
+                    resultData.onNext(it)
+                }, {
+                    resultData.onError(it)
+                })
         return resultData.toFlowable(BackpressureStrategy.BUFFER)
     }
 

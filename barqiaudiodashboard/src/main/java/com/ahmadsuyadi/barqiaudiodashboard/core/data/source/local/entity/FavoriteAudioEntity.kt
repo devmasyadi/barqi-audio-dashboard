@@ -8,38 +8,38 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "favoriteAudio")
 data class FavoriteAudioEntity(
 
-    @PrimaryKey(autoGenerate = true)
-    @NonNull
-    @ColumnInfo(name = "id")
-    val id: Long? = 0,
+        @PrimaryKey(autoGenerate = true)
+        @NonNull
+        @ColumnInfo(name = "id")
+        val id: Long? = 0,
 
-    @ColumnInfo(name = "idByTimestamp")
-    val idByTimestamp: Long? = 0,
+        @ColumnInfo(name = "idByTimestamp")
+        val idByTimestamp: Long? = 0,
 
-    @ColumnInfo(name = "idAudio")
-    val idAudio: String? = null,
+        @ColumnInfo(name = "idAudio")
+        val idAudio: String? = null,
 
-    @ColumnInfo(name = "duration")
-    val duration: String? = null,
+        @ColumnInfo(name = "duration")
+        val duration: String? = null,
 
-    @ColumnInfo(name = "image")
-    val image: String? = null,
+        @ColumnInfo(name = "image")
+        val image: String? = null,
 
-    @ColumnInfo(name = "lyric")
-    val lyric: String? = null,
+        @ColumnInfo(name = "lyric")
+        val lyric: String? = null,
 
-    @ColumnInfo(name = "artist")
-    val artist: String? = null,
+        @ColumnInfo(name = "artist")
+        val artist: String? = null,
 
-    @ColumnInfo(name = "title")
-    val title: String? = null,
+        @ColumnInfo(name = "title")
+        val title: String? = null,
 
-    @ColumnInfo(name = "views")
-    val views: Int? = null,
+        @ColumnInfo(name = "views")
+        val views: Int? = null,
 
-    @ColumnInfo(name = "url")
-    val url: String? = null,
+        @ColumnInfo(name = "url")
+        val url: String? = null,
 
-    @ColumnInfo(name = "last_view")
-    val lastView: String? = null
+        @ColumnInfo(name = "last_view")
+        val lastView: String? = null
 )
