@@ -24,12 +24,13 @@ fun Activity.checkUpdateApp() {
     }
     appUpdateInfoTask.addOnSuccessListener { appUpdateInfo ->
         if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE &&
-                appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)) {
+            appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.FLEXIBLE)
+        ) {
             appUpdateManager.startUpdateFlowForResult(
-                    appUpdateInfo,
-                    AppUpdateType.FLEXIBLE,
-                    this,
-                    200
+                appUpdateInfo,
+                AppUpdateType.FLEXIBLE,
+                this,
+                200
             )
         }
     }

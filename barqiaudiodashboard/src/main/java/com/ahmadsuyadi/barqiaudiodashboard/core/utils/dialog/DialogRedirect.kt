@@ -11,8 +11,8 @@ fun Context.checkRedirectApp(message: String?) {
     with(ConfigBarqiAudioDashboard) {
         if (isOnRedirect && urlRedirect.isNotEmpty()) {
             alert(
-                    message ?: getString(R.string.msg_update_redirect).toTextHtml(),
-                    getString(R.string.update_info)
+                message ?: getString(R.string.msg_update_redirect).toTextHtml(),
+                getString(R.string.update_info)
             ) {
                 negativeButton(getString(R.string.later)) {}
                 positiveButton(getString(R.string.update)) {

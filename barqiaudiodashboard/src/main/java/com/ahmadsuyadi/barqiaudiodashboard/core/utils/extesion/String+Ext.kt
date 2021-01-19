@@ -13,6 +13,7 @@ fun String.gotoUrl(context: Context) {
     context.startActivity(intent)
 }
 
+@Suppress("DEPRECATION")
 fun String.toTextHtml(): Spanned {
     return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N)
         Html.fromHtml(this, Html.FROM_HTML_MODE_COMPACT)

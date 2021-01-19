@@ -5,11 +5,11 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Artist
 
 object ArtistMapper {
     fun mapResponsesToEntities(input: List<ArtistResponse>) =
-            input.map {
-                Artist(
-                        id = it.id,
-                        name = it.name,
-                        image = it.image
-                )
-            }
+        input.map {
+            Artist(
+                id = it.id,
+                name = it.name,
+                image = it.image
+            )
+        }
 }
