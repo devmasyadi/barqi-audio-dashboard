@@ -6,6 +6,8 @@ data class InfoApp(
         val appLovinInter: String? = null,
         val intervalInt: Int? = null,
         val unityGameID: String? = null,
+        val testDeviceID: String? = null,
+        val sdkKeyAppLovin: String? = null,
         val createdAt: String? = null,
         val isTestAds: Boolean? = null,
         val urlRedirect: String? = null,

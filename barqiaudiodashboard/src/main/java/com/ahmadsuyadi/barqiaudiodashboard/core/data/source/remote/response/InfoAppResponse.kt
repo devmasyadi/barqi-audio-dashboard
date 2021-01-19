@@ -10,6 +10,12 @@ data class InfoAppResponse(
         @field:SerializedName("startAppId")
         val startAppId: String? = null,
 
+        @field:SerializedName("testDeviceID")
+        val testDeviceID: String? = null,
+
+        @field:SerializedName("sdkKeyAppLovin")
+        val sdkKeyAppLovin: String? = null,
+
         @field:SerializedName("appLovinInter")
         val appLovinInter: String? = null,
 
