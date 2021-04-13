@@ -10,6 +10,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.*
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.handleMessageError
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.isNetworkAvailable
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.toPathAudioDownload
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -196,10 +197,19 @@ class BarqiRepository(
     override fun addToDownload(audio: Audio): Flow<Resource<Boolean>> {
         return flow {
             emit(Resource.Loading())
+            audio.url = audio.title?.toPathAudioDownload(context)
             val data = DownloadedAudioMapper.mapDomainToEntity(audio)
             localDataSource.insertDownloaded(data)
             emit(Resource.Success(true))
         }.flowOn(Dispatchers.IO)
+    }
+
+    override fun updateAudioDownloadByReq(idReqDownload: Long): Flow<Resource<Boolean>> {
+        return flow {
+            emit(Resource.Loading())
+            localDataSource.updateDownloadedByReq(idReqDownload)
+            emit(Resource.Success(true))
+        }
     }
 
     override fun deleteFromDownload(idAudio: Int): Flow<Resource<Boolean>> {

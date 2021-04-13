@@ -43,10 +43,13 @@ interface AudioDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertDownloaded(data: DownloadedAudioEntity)
 
+    @Query("UPDATE downloadedAudio SET isDownloaded=1 WHERE reqDownloadId= :reqDownload")
+    suspend fun updateDownloadedByReq(reqDownload: Long)
+
     @Query("DELETE FROM downloadedAudio WHERE dataAudioId = :idDownloadedAudio")
     suspend fun deleteDownloadedByIdAudio(idDownloadedAudio: String)
 
-    @Query("SELECT * FROM downloadedAudio")
+    @Query("SELECT * FROM downloadedAudio WHERE isDownloaded=1")
     fun getListDownloaded(): Flow<List<DownloadedAudioEntity>>
 
     //Playlist

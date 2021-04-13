@@ -14,6 +14,8 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.Resource
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Playlist
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.PlaylistAndAudios
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Utils
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Utils.checkPermissions
 import com.ahmadsuyadi.barqiaudiodashboard.core.viewmodel.BarqiDashboardViewModel
 import com.ahmadsuyadi.myapplication.databinding.ActivityMainBinding
 import org.jetbrains.anko.AnkoLogger
@@ -33,6 +35,8 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding?.root)
+
+        checkPermissions(this)
 
         dialogListPlaylist = AlertDialog.Builder(this) .apply {
             this.setTitle("Add to Playlist")
@@ -100,6 +104,12 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
             override fun addToPlaylist(audio: Audio) {
                 audioSelectedToAddPlaylist = audio
                 dialogListPlaylist.show()
+            }
+
+            override fun downloadAudio(audio: Audio) {
+                audio.reqDownloaded = Utils.downloadAudio(this@MainActivity,  audio)
+                barqiDashboardViewModel.addToDownload(audio).observe(this@MainActivity, {})
+
             }
 
             override fun onAddToRecent(audio: Audio) {
@@ -188,6 +198,10 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 TODO("Not yet implemented")
             }
 
+            override fun downloadAudio(audio: Audio) {
+                TODO("Not yet implemented")
+            }
+
             override fun onAddToRecent(audio: Audio) {
                 addAudioToRecent(audio)
             }
@@ -210,6 +224,16 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
                 is Resource.Loading -> info("Hallo getDummyTest loading")
                 is Resource.Success -> {
                     info("Hallo getDummyTest success ${resources.data}")
+                }
+            }
+        })
+
+        barqiDashboardViewModel.getAudiosDownload().observe(this, { resources ->
+            when(resources) {
+                is Resource.Error -> info("Hallo getAudiosDownload error: ${resources.message}")
+                is Resource.Loading -> info("Hallo getAudiosDownload loading")
+                is Resource.Success -> {
+                    info("Hallo getAudiosDownload success ${resources.data}")
                 }
             }
         })

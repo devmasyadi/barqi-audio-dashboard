@@ -20,3 +20,7 @@ fun String.toTextHtml(): Spanned {
     else
         Html.fromHtml(this)
 }
+
+fun String.toPathAudioDownload(context: Context): String {
+    return "${context.applicationInfo.dataDir}/${this}.mp3"
+}

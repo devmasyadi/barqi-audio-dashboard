@@ -20,6 +20,10 @@ fun View.showPopMenuAudio(audio: Audio, iAudio: IAudioAdapter?) {
                 iAudio?.addToPlaylist(audio)
                 true
             }
+            R.id.actionDownloadAudio -> {
+                iAudio?.downloadAudio(audio)
+                true
+            }
             else -> false
         }
     }

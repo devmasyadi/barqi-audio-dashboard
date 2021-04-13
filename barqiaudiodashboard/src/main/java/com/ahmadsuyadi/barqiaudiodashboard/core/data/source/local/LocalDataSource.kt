@@ -24,6 +24,7 @@ class LocalDataSource(
 
     //DownloadedAudio
     suspend fun insertDownloaded(data: DownloadedAudioEntity) = audioDao.insertDownloaded(data)
+    suspend fun updateDownloadedByReq(reqDownload: Long) = audioDao.updateDownloadedByReq(reqDownload)
     suspend fun deleteDownloadedByIdAudio(idDownloadedAudio: String) = audioDao.deleteDownloadedByIdAudio(idDownloadedAudio)
     fun getListDownloaded() = audioDao.getListDownloaded()
 

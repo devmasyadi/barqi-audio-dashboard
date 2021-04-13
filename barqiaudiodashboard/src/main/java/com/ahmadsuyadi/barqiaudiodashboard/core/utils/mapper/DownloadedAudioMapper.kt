@@ -7,14 +7,15 @@ object DownloadedAudioMapper {
     fun mapDomainToEntity(input: Audio) =
         DownloadedAudioEntity(
             downloadedAudioId = input.id,
-            audio = AudioMapper.mapDomainToEntity(input)
+            audio = AudioMapper.mapDomainToEntity(input),
+            reqDownloadId = input.reqDownloaded
         )
 
     fun mapEntitiesToDomains(input: List<DownloadedAudioEntity>) =
         input.map {
             val audio = it.audio
             audio.dataAudioId = it.downloadedAudioId
-            AudioMapper.mapEntityToDomain(audio)
+            AudioMapper.mapEntityToDomain(audio, it.reqDownloadId)
         }
 
 }

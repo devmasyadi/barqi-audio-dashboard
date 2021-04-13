@@ -6,4 +6,5 @@ import com.ahmadsuyadi.myapplication.utils.BaseIAudioAdapter
 interface IAudioAdapter: BaseIAudioAdapter {
     fun addToFavorite(audio: Audio)
     fun addToPlaylist(audio: Audio)
+    fun downloadAudio(audio: Audio)
 }

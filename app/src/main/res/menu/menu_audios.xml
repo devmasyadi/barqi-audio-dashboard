@@ -6,4 +6,7 @@
     <item
         android:id="@+id/actionAddToPlaylist"
         android:title="add To Playlist" />
+    <item
+        android:id="@+id/actionDownloadAudio"
+        android:title="download Audio" />
 </menu>

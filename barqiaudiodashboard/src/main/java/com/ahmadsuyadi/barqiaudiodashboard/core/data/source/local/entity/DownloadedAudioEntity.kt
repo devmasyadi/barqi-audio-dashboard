@@ -8,6 +8,8 @@ import androidx.room.PrimaryKey
 data class DownloadedAudioEntity(
     @PrimaryKey
     val downloadedAudioId: Int? = null,
+    val isDownloaded: Boolean? = false,
+    val reqDownloadId: Long? = null,
     @Embedded
     val audio: DataAudioEntity
 )

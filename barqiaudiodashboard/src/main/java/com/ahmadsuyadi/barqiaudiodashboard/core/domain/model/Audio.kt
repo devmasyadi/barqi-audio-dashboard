@@ -8,7 +8,8 @@ data class Audio(
     val artist: String? = null,
     val title: String? = null,
     val views: Int? = null,
-    val url: String? = null,
-    val lastView: String? = null
+    var url: String? = null,
+    val lastView: String? = null,
+    var reqDownloaded: Long? = null
 )
 

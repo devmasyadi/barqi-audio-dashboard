@@ -32,11 +32,11 @@ object AudioMapper {
                 url = url,
                 artist = artist,
                 lastView = lastView,
-                image = image
+                image = image,
             )
         }
 
-    fun mapEntityToDomain(input: DataAudioEntity) =
+    fun mapEntityToDomain(input: DataAudioEntity, reqDownloaded: Long? = -1) =
         with(input) {
             Audio(
                 id = dataAudioId,
@@ -47,7 +47,8 @@ object AudioMapper {
                 url = url,
                 artist = artist,
                 lastView = lastView,
-                image = image
+                image = image,
+                reqDownloaded = reqDownloaded
             )
         }
 
