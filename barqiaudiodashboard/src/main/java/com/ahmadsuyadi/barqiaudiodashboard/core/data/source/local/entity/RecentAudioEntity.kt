@@ -4,10 +4,10 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "favoriteAudio")
-data class FavoriteAudioEntity(
+@Entity(tableName = "recentAudio")
+data class RecentAudioEntity(
     @PrimaryKey
-    val favoriteAudioId: Int? = null,
+    val recentAudioId: Int? = null,
     @Embedded
-    val audio: DataAudioEntity
+    val audioEntity: DataAudioEntity
 )

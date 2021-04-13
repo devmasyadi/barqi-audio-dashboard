@@ -1,36 +1,19 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper
 
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.RecentPlayedAudioEntity
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.RecentAudioEntity
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 
 object RecentPlayedAudioMapper {
     fun mapAudioToEntity(input: Audio) =
-        RecentPlayedAudioEntity(
-            idAudio = input.id,
-            idByTimestamp = input.idByTimestamp,
-            title = input.title,
-            duration = input.duration,
-            views = input.views,
-            lyric = input.lyric,
-            url = input.url,
-            artist = input.artist,
-            lastView = input.lastView,
-            image = input.image
+        RecentAudioEntity(
+            recentAudioId = input.id,
+            audioEntity = AudioMapper.mapDomainToEntity(input)
         )
 
-    fun mapEntitiesToAudios(input: List<RecentPlayedAudioEntity>) =
+    fun mapEntitiesToAudios(input: List<RecentAudioEntity>) =
         input.map {
-            Audio(
-                id = it.idAudio,
-                idByTimestamp = it.idByTimestamp,
-                title = it.title,
-                duration = it.duration,
-                views = it.views,
-                lyric = it.lyric,
-                url = it.url,
-                artist = it.artist,
-                lastView = it.lastView,
-                image = it.image
-            )
+            val audio = it.audioEntity
+            audio.dataAudioId = it.recentAudioId
+            AudioMapper.mapEntityToDomain(audio)
         }
 }

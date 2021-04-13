@@ -6,27 +6,29 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSourc
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.room.BarqiDatabase
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
-import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.AppExecutors
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.ConfigBarqiAudioDashboard
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.ACCESS_TOKEN
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.HEADER_CACHE_CONTROL
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.Constants.HEADER_PRAGMA
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.isNetworkAvailable
+import com.ahmadsuyadi.barqiaudiodashboard.core.viewmodel.BarqiDashboardViewModel
 import net.sqlcipher.database.SQLiteDatabase
 import net.sqlcipher.database.SupportFactory
-import okhttp3.*
+import okhttp3.Cache
+import okhttp3.CacheControl
+import okhttp3.Interceptor
+import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
+import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
-val databaseModule = module {
-    factory { get<BarqiDatabase>().favoriteAudioDao() }
-    factory { get<BarqiDatabase>().recentPlayedAudioDao() }
+val barqiDashboardDatabaseModule = module {
+    factory { get<BarqiDatabase>().audioDao() }
     single {
         val passphrase: ByteArray = SQLiteDatabase.getBytes("BarqiAudioDashboard".toCharArray())
         val factory = SupportFactory(passphrase)
@@ -39,15 +41,10 @@ val databaseModule = module {
     }
 }
 
-val networkModule = module {
+val barqiDashboardNetworkModule = module {
     single {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
-            .setLevel(
-                if (androidContext().applicationInfo.flags == 0)
-                    HttpLoggingInterceptor.Level.BODY
-                else
-                    HttpLoggingInterceptor.Level.NONE
-            )
+            .setLevel(HttpLoggingInterceptor.Level.NONE)
         val headerInterceptor = Interceptor {
             val request = it.request()
                 .newBuilder()
@@ -56,21 +53,19 @@ val networkModule = module {
         }
 
         fun offlineInterceptor(): Interceptor {
-            return object : Interceptor {
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    var request = chain.request()
-                    val cacheControl = CacheControl.Builder()
-                        .maxStale(1000, TimeUnit.DAYS)
+            return Interceptor { chain ->
+                var request = chain.request()
+                val cacheControl = CacheControl.Builder()
+                    .maxStale(1000, TimeUnit.DAYS)
+                    .build()
+                if (!isNetworkAvailable(get())) {
+                    request = request.newBuilder()
+                        .removeHeader(HEADER_PRAGMA)
+                        .removeHeader(HEADER_CACHE_CONTROL)
+                        .cacheControl(cacheControl)
                         .build()
-                    if (!isNetworkAvailable(get())) {
-                        request = request.newBuilder()
-                            .removeHeader(HEADER_PRAGMA)
-                            .removeHeader(HEADER_CACHE_CONTROL)
-                            .cacheControl(cacheControl)
-                            .build()
-                    }
-                    return chain.proceed(request)
                 }
+                chain.proceed(request)
             }
         }
 
@@ -95,20 +90,20 @@ val networkModule = module {
     }
 }
 
-val repositoryModule = module {
+val barqiDashboardRepositoryModule = module {
 
     single { RemoteDataSource(get()) }
-    single { LocalDataSource(get(), get()) }
-    factory { AppExecutors() }
+    single { LocalDataSource(get()) }
 
-    single<IBarqiRepository> {
+    single {
         BarqiRepository(
-            get(),
             get(),
             get(),
             get()
         )
     }
+}
 
-
+val barqiDashboardViewModelModule = module {
+    viewModel { BarqiDashboardViewModel(get()) }
 }

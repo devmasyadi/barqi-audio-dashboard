@@ -6,32 +6,15 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 object FavoriteAudioMapper {
     fun mapAudioToEntity(input: Audio) =
         FavoriteAudioEntity(
-            idAudio = input.id,
-            idByTimestamp = input.idByTimestamp,
-            title = input.title,
-            duration = input.duration,
-            views = input.views,
-            lyric = input.lyric,
-            url = input.url,
-            artist = input.artist,
-            lastView = input.lastView,
-            image = input.image
+            favoriteAudioId = input.id,
+            audio = AudioMapper.mapDomainToEntity(input)
         )
 
     fun mapEntitiesToAudios(input: List<FavoriteAudioEntity>) =
         input.map {
-            Audio(
-                id = it.idAudio,
-                idByTimestamp = it.idByTimestamp,
-                title = it.title,
-                duration = it.duration,
-                views = it.views,
-                lyric = it.lyric,
-                url = it.url,
-                artist = it.artist,
-                lastView = it.lastView,
-                image = it.image
-            )
+            val audio = it.audio
+            audio.dataAudioId = it.favoriteAudioId
+            AudioMapper.mapEntityToDomain(audio)
         }
 
 }

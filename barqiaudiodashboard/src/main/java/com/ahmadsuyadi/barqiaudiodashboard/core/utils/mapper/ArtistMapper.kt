@@ -4,7 +4,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.Arti
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Artist
 
 object ArtistMapper {
-    fun mapResponsesToEntities(input: List<ArtistResponse>) =
+    fun mapResponsesToDomains(input: List<ArtistResponse>) =
         input.map {
             Artist(
                 id = it.id,

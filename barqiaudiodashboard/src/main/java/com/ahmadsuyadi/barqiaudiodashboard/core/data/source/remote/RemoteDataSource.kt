@@ -1,170 +1,29 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote
 
-import android.annotation.SuppressLint
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistV2Response
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
-import io.reactivex.BackpressureStrategy
-import io.reactivex.Flowable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
-import okhttp3.ResponseBody
 
 class RemoteDataSource(
     private val apiService: ApiService
 ) {
 
-    @SuppressLint("CheckResult")
-    fun getInfoApp(packageName: String): Flowable<InfoAppResponse> {
-        val resultData = PublishSubject.create<InfoAppResponse>()
-        apiService.getInfoApp(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getInfoApp(packageName: String) = apiService.getInfoApp(packageName)
 
-    @SuppressLint("CheckResult")
-    fun getArtists(packageName: String): Flowable<List<ArtistResponse>> {
-        val resultData = PublishSubject.create<List<ArtistResponse>>()
-        apiService.getArtists(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getArtists(packageName: String) = apiService.getArtists(packageName)
 
-    @SuppressLint("CheckResult")
-    fun getAudios(packageName: String): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.getAudios(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getAudios(packageName: String) = apiService.getAudios(packageName)
 
-    @SuppressLint("CheckResult")
-    fun increaseView(idAudio: String): Flowable<ResponseBody> {
-        val resultData = PublishSubject.create<ResponseBody>()
-        apiService.increaseView(idAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun increaseView(idAudio: String) = apiService.increaseView(idAudio)
 
-    @SuppressLint("CheckResult")
-    fun getArtistsV2(packageName: String): Flowable<List<ArtistV2Response>> {
-        val resultData = PublishSubject.create<List<ArtistV2Response>>()
-        apiService.getArtistsV2(packageName)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getArtistsV2(packageName: String) = apiService.getArtistsV2(packageName)
 
-    @SuppressLint("CheckResult")
-    fun getAudiosTrending(packageName: String, limit: Int?): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.getAudiosTrending(packageName, limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getAudiosTrending(packageName: String, limit: Int?) = apiService.getAudiosTrending(packageName, limit)
 
-    @SuppressLint("CheckResult")
-    fun getLatestUpload(packageName: String, limit: Int?): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.getLatestUpload(packageName, limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getLatestUpload(packageName: String, limit: Int?) = apiService.getLatestUpload(packageName, limit)
 
-    @SuppressLint("CheckResult")
-    fun getAudiosRecent(limit: Int?): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.getAudiosRecent(limit)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getAudiosRecent(limit: Int?) = apiService.getAudiosRecent(limit)
 
-    @SuppressLint("CheckResult")
-    fun searchAudio(nameAudio: String?): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.searchAudio(nameAudio)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun searchAudio(nameAudio: String?) = apiService.searchAudio(nameAudio)
 
-    @SuppressLint("CheckResult")
-    fun getAudioByArtistId(artistId: String?): Flowable<List<AudioResponse>> {
-        val resultData = PublishSubject.create<List<AudioResponse>>()
-        apiService.getByArtistID(artistId)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
-            .take(1)
-            .subscribe({
-                resultData.onNext(it)
-            }, {
-                resultData.onError(it)
-            })
-        return resultData.toFlowable(BackpressureStrategy.BUFFER)
-    }
+    suspend fun getAudioByArtistId(artistId: String?) = apiService.getByArtistID(artistId)
 
 }
