@@ -10,6 +10,7 @@ data class Audio(
     val views: Int? = null,
     var url: String? = null,
     val lastView: String? = null,
-    var reqDownloaded: Long? = null
+    var reqDownloaded: Long? = null,
+    var idServer: String? = null,
 )
 
