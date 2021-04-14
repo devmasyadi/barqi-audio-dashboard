@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Environment
 import androidx.core.app.ActivityCompat
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.validateTitleDownload
 import java.io.File
 import java.util.ArrayList
 
@@ -47,7 +48,7 @@ object Utils {
         request.setAllowedOverRoaming(false)
         request.setTitle("Download ${audio.title}.mp3")
         request.setVisibleInDownloadsUi(true)
-        val file = File(Environment.getExternalStorageDirectory(), "/${context.packageName}/${audio.title}.mp3")
+        val file = File(Environment.getExternalStorageDirectory(), "/${context.packageName}/${audio.title?.validateTitleDownload()}.mp3")
         request.setDestinationUri( Uri.fromFile(file))
         return downloadManager.enqueue(request)
     }

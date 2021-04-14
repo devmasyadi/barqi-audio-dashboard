@@ -6,6 +6,7 @@ import android.net.Uri
 import android.os.Build
 import android.text.Html
 import android.text.Spanned
+import java.io.File
 
 fun String.gotoUrl(context: Context) {
     val uri = Uri.parse(this)
@@ -24,3 +25,9 @@ fun String.toTextHtml(): Spanned {
 fun String.toPathAudioDownload(context: Context): String {
     return "${context.applicationInfo.dataDir}/${this}.mp3"
 }
+
+fun String.toDeleteFile() {
+    File(this).delete()
+}
+
+fun String.validateTitleDownload() = this.replace("/", "")

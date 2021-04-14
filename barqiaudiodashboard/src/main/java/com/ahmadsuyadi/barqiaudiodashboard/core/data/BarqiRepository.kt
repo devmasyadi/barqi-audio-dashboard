@@ -8,9 +8,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.Playlis
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.*
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.repository.IBarqiRepository
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.handleMessageError
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.isNetworkAvailable
-import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.toPathAudioDownload
+import com.ahmadsuyadi.barqiaudiodashboard.core.utils.extesion.*
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -197,7 +195,7 @@ class BarqiRepository(
     override fun addToDownload(audio: Audio): Flow<Resource<Boolean>> {
         return flow {
             emit(Resource.Loading())
-            audio.url = audio.title?.toPathAudioDownload(context)
+            audio.url = audio.title?.validateTitleDownload()?.toPathAudioDownload(context)
             val data = DownloadedAudioMapper.mapDomainToEntity(audio)
             localDataSource.insertDownloaded(data)
             emit(Resource.Success(true))
@@ -212,11 +210,16 @@ class BarqiRepository(
         }
     }
 
-    override fun deleteFromDownload(idAudio: Int): Flow<Resource<Boolean>> {
-        return flow {
-            emit(Resource.Loading())
-            localDataSource.deleteFavoriteByIdAudio(idAudio)
-            emit(Resource.Success(true))
+    override fun deleteFromDownload(audio: Audio): Flow<Resource<Boolean>> {
+        return flow<Resource<Boolean>> {
+            try {
+                emit(Resource.Loading())
+                audio.url?.toDeleteFile()
+                localDataSource.deleteDownloadedByIdAudio(audio.id.toString())
+                emit(Resource.Success(true))
+            }catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
         }.flowOn(Dispatchers.IO)
     }
 

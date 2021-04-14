@@ -38,8 +38,6 @@ class AddDownloadToDbIntentService : JobIntentService(), AnkoLogger {
                 }
             }
         }
-
-        info("Hallo download from service reqDownload: $reqDownload")
     }
 
 }
