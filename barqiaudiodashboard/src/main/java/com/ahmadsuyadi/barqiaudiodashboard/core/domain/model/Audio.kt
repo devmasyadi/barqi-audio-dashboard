@@ -1,5 +1,9 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Audio(
     val id: Int? = null,
     val duration: String? = null,
@@ -12,5 +16,5 @@ data class Audio(
     val lastView: String? = null,
     var reqDownloaded: Long? = null,
     var idServer: String? = null,
-)
+) : Parcelable
 

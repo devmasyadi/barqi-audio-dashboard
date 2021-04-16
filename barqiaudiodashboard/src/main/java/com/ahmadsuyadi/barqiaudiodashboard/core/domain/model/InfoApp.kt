@@ -1,5 +1,9 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.domain.model
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class InfoApp(
     val isShowAds: Boolean? = null,
     val startAppId: String? = null,
@@ -32,5 +36,5 @@ data class InfoApp(
     val id: String? = null,
     val unityInter: String? = null,
     val privacyPolicyApp: String? = null
-)
+) : Parcelable
 
