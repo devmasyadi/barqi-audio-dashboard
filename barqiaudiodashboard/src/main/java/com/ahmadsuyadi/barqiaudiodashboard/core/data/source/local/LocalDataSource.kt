@@ -39,4 +39,8 @@ class LocalDataSource(
     fun getPlaylistAndAudios() = audioDao.getPlaylistAndAudios()
     fun getAudiosByPlaylist(playlistId: Int) = audioDao.getAudiosByPlaylist(playlistId)
     fun getPlaylistAudioCrossRef() = audioDao.getPlaylistAudioCrossRef()
+
+    //currentPlaying
+    suspend fun setCurrentPlaying(data: CurrentPlayingEntity) =  audioDao.setCurrentPlaying(data)
+    fun getCurrentPlaying() = audioDao.getCurrentPlaying()
 }

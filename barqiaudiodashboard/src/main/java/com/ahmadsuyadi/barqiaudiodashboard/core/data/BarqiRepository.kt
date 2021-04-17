@@ -3,6 +3,7 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.data
 import android.content.Context
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.AudioEntity
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.CurrentPlayingEntity
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.PlaylistAudioCrossRef
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.PlaylistEntity
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.RemoteDataSource
@@ -301,6 +302,24 @@ class BarqiRepository(
         return flow {
             emit(Resource.Loading())
             emitAll(localDataSource.getPlaylistAudioCrossRef().map { Resource.Success(it) })
+        }
+    }
+
+    override fun setCurrentPlaying(audio: Audio) {
+        GlobalScope.launch {
+            localDataSource.setCurrentPlaying(CurrentPlayingEntity(1, AudioMapper.mapDomainToEntity(audio)))
+        }
+    }
+
+    override fun getCurrentPlaying(): Flow<Resource<Audio>> {
+        return flow {
+            emit(Resource.Loading())
+            localDataSource.getCurrentPlaying().collect {
+                if(it.isNotEmpty()) {
+                    val result = AudioMapper.mapEntityToDomain(it.first().audio)
+                    emit(Resource.Success(result))
+                }
+            }
         }
     }
 }

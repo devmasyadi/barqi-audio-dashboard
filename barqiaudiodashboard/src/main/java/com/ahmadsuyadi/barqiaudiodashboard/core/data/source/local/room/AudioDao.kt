@@ -85,4 +85,11 @@ interface AudioDao {
     @Query("SELECT * FROM playlistaudiocrossref")
     fun getPlaylistAudioCrossRef(): Flow<List<PlaylistAudioCrossRef>>
 
+    //currentPlaying
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun setCurrentPlaying(data: CurrentPlayingEntity)
+
+    @Query("SELECT * FROM currentPlaying")
+    fun getCurrentPlaying(): Flow<List<CurrentPlayingEntity>>
+
 }

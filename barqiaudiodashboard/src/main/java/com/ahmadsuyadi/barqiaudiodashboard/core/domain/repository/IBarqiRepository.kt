@@ -36,4 +36,6 @@ interface IBarqiRepository {
     fun getPlaylistAndAudios(): Flow<Resource<List<PlaylistAndAudios>>>
     fun getAudiosByPlaylist(idPlaylist: Int): Flow<Resource<List<Audio>>>
     fun getDataDummyTest(): Flow<Resource<List<PlaylistAudioCrossRef>>>
+    fun setCurrentPlaying(audio: Audio)
+    fun getCurrentPlaying(): Flow<Resource<Audio>>
 }

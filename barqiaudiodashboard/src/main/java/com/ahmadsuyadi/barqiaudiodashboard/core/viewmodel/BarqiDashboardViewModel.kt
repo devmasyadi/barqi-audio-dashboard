@@ -37,4 +37,6 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
     fun getPlaylistAndAudios() = barqiRepository.getPlaylistAndAudios().asLiveData()
     fun getAudiosByPlaylist(playlistId: Int) = barqiRepository.getAudiosByPlaylist(playlistId).asLiveData()
     fun getDummyTest() = barqiRepository.getDataDummyTest().asLiveData()
+    fun setCurrentPlaying(audio: Audio) = barqiRepository.setCurrentPlaying(audio)
+    fun getCurrentPlaying() = barqiRepository.getCurrentPlaying().asLiveData()
 }
