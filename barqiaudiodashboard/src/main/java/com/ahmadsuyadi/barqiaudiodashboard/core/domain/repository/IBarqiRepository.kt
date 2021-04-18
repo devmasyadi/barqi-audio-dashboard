@@ -38,4 +38,6 @@ interface IBarqiRepository {
     fun getDataDummyTest(): Flow<Resource<List<PlaylistAudioCrossRef>>>
     fun setCurrentPlaying(audio: Audio)
     fun getCurrentPlaying(): Flow<Resource<Audio>>
+    fun addRequestAudio(data: RequestedAudio):Flow<Resource<Boolean>>
+    fun getRequestedAudios():Flow<Resource<List<RequestedAudio>>>
 }

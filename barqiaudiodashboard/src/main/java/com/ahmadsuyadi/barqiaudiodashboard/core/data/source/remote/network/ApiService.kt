@@ -1,13 +1,9 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network
 
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistV2Response
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.*
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 import okhttp3.ResponseBody
-import retrofit2.http.GET
-import retrofit2.http.PATCH
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
     @GET("api/apps/info")
@@ -61,5 +57,16 @@ interface ApiService {
     suspend fun getByArtistID(
         @Query("artistId") artistID: String? = null
     ): List<AudioResponse>
+
+    @POST("api/requestedAudio")
+    suspend fun addRequestedAudio(
+            @Query("packageName") packageName: String? = null,
+            @Body requestedAudio: RequestedAudio? =null
+    ): ResponseBody
+
+    @GET("api/requestedAudio/byApp")
+    suspend fun getRequestedAudio(
+            @Query("packageName") packageName: String? = null
+    ): List<RequestedAudioResponse>
 
 }

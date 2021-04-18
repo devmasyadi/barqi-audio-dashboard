@@ -1,6 +1,7 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote
 
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 
 class RemoteDataSource(
     private val apiService: ApiService
@@ -25,5 +26,9 @@ class RemoteDataSource(
     suspend fun searchAudio(nameAudio: String?) = apiService.searchAudio(nameAudio)
 
     suspend fun getAudioByArtistId(artistId: String?) = apiService.getByArtistID(artistId)
+
+    suspend fun addRequestedAudio(packageName: String?, data: RequestedAudio?) = apiService.addRequestedAudio(packageName, data)
+
+    suspend fun getRequestedAudio(packageName: String?) = apiService.getRequestedAudio(packageName)
 
 }

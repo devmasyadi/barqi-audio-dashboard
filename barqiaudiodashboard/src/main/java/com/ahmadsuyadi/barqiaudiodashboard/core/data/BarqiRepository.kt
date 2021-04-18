@@ -322,4 +322,28 @@ class BarqiRepository(
             }
         }
     }
+
+    override fun addRequestAudio(data: RequestedAudio): Flow<Resource<Boolean>> {
+        return flow<Resource<Boolean>> {
+            try {
+                emit(Resource.Loading())
+                remoteDataSource.addRequestedAudio(context.packageName, data)
+                emit(Resource.Success(true))
+            }catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
+
+    override fun getRequestedAudios(): Flow<Resource<List<RequestedAudio>>> {
+        return flow<Resource<List<RequestedAudio>>> {
+            try {
+                emit(Resource.Loading())
+                val response = remoteDataSource.getRequestedAudio(context.packageName)
+                emit(Resource.Success(RequestedAudioMapper.mapResponsesToDomains(response)))
+            }catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
 }

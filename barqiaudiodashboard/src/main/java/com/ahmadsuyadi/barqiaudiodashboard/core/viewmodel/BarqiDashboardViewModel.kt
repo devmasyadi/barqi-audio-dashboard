@@ -5,6 +5,7 @@ import androidx.lifecycle.asLiveData
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.BarqiRepository
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Playlist
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 
 class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : ViewModel() {
     fun getInfoApp() = barqiRepository.getInfoApp().asLiveData()
@@ -39,4 +40,6 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
     fun getDummyTest() = barqiRepository.getDataDummyTest().asLiveData()
     fun setCurrentPlaying(audio: Audio) = barqiRepository.setCurrentPlaying(audio)
     fun getCurrentPlaying() = barqiRepository.getCurrentPlaying().asLiveData()
+    fun addRequestAudio(data: RequestedAudio) = barqiRepository.addRequestAudio(data).asLiveData()
+    fun getRequestedAudios() = barqiRepository.getRequestedAudios().asLiveData()
 }
