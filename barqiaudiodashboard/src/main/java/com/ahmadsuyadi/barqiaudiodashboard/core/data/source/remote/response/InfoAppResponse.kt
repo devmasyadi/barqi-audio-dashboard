@@ -1,99 +1,41 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response
 
-import com.google.gson.annotations.SerializedName
-
 data class InfoAppResponse(
-
-    @field:SerializedName("isShowAds")
-    val isShowAds: Boolean? = null,
-
-    @field:SerializedName("startAppId")
-    val startAppId: String? = null,
-
-    @field:SerializedName("testDeviceID")
-    val testDeviceID: String? = null,
-
-    @field:SerializedName("sdkKeyAppLovin")
-    val sdkKeyAppLovin: String? = null,
-
-    @field:SerializedName("appLovinInter")
-    val appLovinInter: String? = null,
-
-    @field:SerializedName("intervalInt")
-    val intervalInt: Int? = null,
-
-    @field:SerializedName("unityGameID")
-    val unityGameID: String? = null,
-
-    @field:SerializedName("createdAt")
-    val createdAt: String? = null,
-
-    @field:SerializedName("isTestAds")
-    val isTestAds: Boolean? = null,
-
-    @field:SerializedName("urlRedirect")
-    val urlRedirect: String? = null,
-
-    @field:SerializedName("packageName")
-    val packageName: String? = null,
-
-    @field:SerializedName("idRewardAdmob")
-    val idRewardAdmob: String? = null,
-
-    @field:SerializedName("updatedAt")
-    val updatedAt: String? = null,
-
-    @field:SerializedName("idBannerAdmob")
-    val idBannerAdmob: String? = null,
-
-    @field:SerializedName("mopubInter")
-    val mopubInter: String? = null,
-
-    @field:SerializedName("openIdAdmob")
-    val openIdAdmob: String? = null,
-
-    @field:SerializedName("isOnRedirect")
-    val isOnRedirect: Boolean? = null,
-
-    @field:SerializedName("isShowImageAudio")
-    val isShowImageAudio: Boolean? = null,
-
-    @field:SerializedName("fanInter")
-    val fanInter: String? = null,
-
-    @field:SerializedName("unityBanner")
-    val unityBanner: String? = null,
-
-    @field:SerializedName("modeAds")
-    val modeAds: Int? = null,
-
-    @field:SerializedName("fanBanner")
-    val fanBanner: String? = null,
-
-    @field:SerializedName("appLovinBanner")
-    val appLovinBanner: String? = null,
-
-    @field:SerializedName("idNativeAdmob")
-    val idNativeAdmob: String? = null,
-
-    @field:SerializedName("urlMoreApp")
-    val urlMoreApp: String? = null,
-
-    @field:SerializedName("mopubBanner")
-    val mopubBanner: String? = null,
-
-    @field:SerializedName("name")
-    val name: String? = null,
-
-    @field:SerializedName("idIntAdmob")
-    val idIntAdmob: String? = null,
-
-    @field:SerializedName("_id")
-    val id: String? = null,
-
-    @field:SerializedName("unityInter")
-    val unityInter: String? = null,
-
-    @field:SerializedName("privacyPolicyApp")
-    val privacyPolicyApp: String? = null
+	val isShowAds: Boolean? = null,
+	val startAppId: String? = null,
+	val appLovinInter: String? = null,
+	val intervalInt: Int? = null,
+	val unityGameID: String? = null,
+	val isTestAds: Boolean? = null,
+	val testDeviceID: String? = null,
+	val urlRedirect: String? = null,
+	val packageName: String? = null,
+	val idRewardAdmob: String? = null,
+	val idBannerAdmob: String? = null,
+	val mopubInter: String? = null,
+	val openIdAdmob: String? = null,
+	val isOnRedirect: Boolean? = null,
+	val isShowImageAudio: Boolean? = null,
+	val fanInter: String? = null,
+	val unityBanner: String? = null,
+	val modeAds: Int? = null,
+	val fanBanner: String? = null,
+	val appLovinBanner: String? = null,
+	val idNativeAdmob: String? = null,
+	val urlMoreApp: String? = null,
+	val sdkKeyAppLovin: String? = null,
+	val mopubBanner: String? = null,
+	val name: String? = null,
+	val testDevices: List<TestDevicesItemResponse>? = null,
+	val idIntAdmob: String? = null,
+	val id: String? = null,
+	val unityInter: String? = null,
+	val privacyPolicyApp: String? = null
 )
+
+data class TestDevicesItemResponse(
+	val id: String? = null,
+	val deviceName: String? = null,
+	val deviceId: String? = null
+)
+

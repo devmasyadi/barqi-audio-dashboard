@@ -2,35 +2,48 @@ package com.ahmadsuyadi.barqiaudiodashboard.core.utils.mapper
 
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.InfoApp
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.TestDevicesItem
 
 object InfoAppMapper {
     fun mapResponseToDomain(input: InfoAppResponse) =
-        InfoApp(
-            isShowAds = input.isShowAds,
-            isTestAds = input.isTestAds,
-            isShowImageAudio = input.isShowImageAudio,
-            modeAds = input.modeAds,
-            testDeviceID = input.testDeviceID,
-            idBannerAdmob = input.idBannerAdmob,
-            idIntAdmob = input.idIntAdmob,
-            idNativeAdmob = input.idNativeAdmob,
-            idRewardAdmob = input.idRewardAdmob,
-            openIdAdmob = input.openIdAdmob,
-            unityGameID = input.unityGameID,
-            unityBanner = input.unityBanner,
-            unityInter = input.unityInter,
-            fanBanner = input.fanBanner,
-            fanInter = input.fanInter,
-            mopubBanner = input.mopubBanner,
-            mopubInter = input.mopubInter,
-            startAppId = input.startAppId,
-            intervalInt = input.intervalInt,
-            isOnRedirect = input.isOnRedirect,
-            sdkKeyAppLovin = input.sdkKeyAppLovin,
-            appLovinInter = input.appLovinInter,
-            appLovinBanner = input.appLovinBanner,
-            urlMoreApp = input.urlMoreApp,
-            privacyPolicyApp = input.privacyPolicyApp,
-            urlRedirect = input.urlRedirect
-        )
+        with(input) {
+            InfoApp(
+                isShowAds = isShowAds,
+                startAppId = startAppId,
+                appLovinInter = appLovinInter,
+                intervalInt = intervalInt,
+                unityGameID = unityGameID,
+                isTestAds = isTestAds,
+                testDeviceID = testDeviceID,
+                urlRedirect = urlRedirect,
+                packageName = packageName,
+                idRewardAdmob = idRewardAdmob,
+                idBannerAdmob = idBannerAdmob,
+                mopubInter = mopubInter,
+                openIdAdmob = openIdAdmob,
+                isOnRedirect = isOnRedirect,
+                isShowImageAudio = isShowImageAudio,
+                fanInter = fanInter,
+                unityBanner = unityBanner,
+                modeAds = modeAds,
+                fanBanner = fanBanner,
+                appLovinBanner = appLovinBanner,
+                idNativeAdmob = idNativeAdmob,
+                urlMoreApp = urlMoreApp,
+                sdkKeyAppLovin = sdkKeyAppLovin,
+                mopubBanner = mopubBanner,
+                name = name,
+                testDevices = testDevices?.map {
+                    TestDevicesItem(
+                        id = it.id,
+                        deviceName = it.deviceName,
+                        deviceId = it.deviceId
+                    )
+                },
+                idIntAdmob = idIntAdmob,
+                id = id,
+                unityInter = unityInter,
+                privacyPolicyApp = privacyPolicyApp,
+            )
+        }
 }

@@ -5,7 +5,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.Environment
-import androidx.core.app.JobIntentService.enqueueWork
 import com.ahmadsuyadi.barqiaudiodashboard.core.utils.service.AddDownloadToDbIntentService
 import org.jetbrains.anko.AnkoLogger
 import org.jetbrains.anko.info
@@ -29,7 +28,7 @@ class DownloadAudioReceiver : BroadcastReceiver(), AnkoLogger {
             try {
                 it.copyTo(File("${context.applicationInfo.dataDir}/${it.name}"), true)
                 it.delete()
-            }catch (e: Exception) {
+            } catch (e: Exception) {
                 it.delete()
             }
         }

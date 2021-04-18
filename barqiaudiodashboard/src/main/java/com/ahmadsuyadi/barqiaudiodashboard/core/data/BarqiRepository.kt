@@ -69,18 +69,6 @@ class BarqiRepository(
         }
     }
 
-    override fun getArtistsV2(): Flow<Resource<List<ArtisV2>>> {
-        return flow<Resource<List<ArtisV2>>> {
-            try {
-                emit(Resource.Loading())
-                val resultData = remoteDataSource.getArtistsV2(context.packageName)
-                emit(Resource.Success(ArtistV2Mapper.mapResponsesToDomains(resultData)))
-            } catch (e: Throwable) {
-                emit(Resource.Error(e.handleMessageError()))
-            }
-        }
-    }
-
     override fun getAudiosTrending(limit: Int?): Flow<Resource<List<Audio>>> {
         return flow<Resource<List<Audio>>> {
             try {
@@ -153,7 +141,7 @@ class BarqiRepository(
     override fun removeAudioFromFavorite(idAudio: Int): Flow<Resource<Boolean>> {
         return flow {
             emit(Resource.Loading())
-            localDataSource.deleteFavoriteByIdAudio (idAudio)
+            localDataSource.deleteFavoriteByIdAudio(idAudio)
             emit(Resource.Success(true))
         }
     }
@@ -169,7 +157,7 @@ class BarqiRepository(
     }
 
     override fun isAudioFavorite(idAudio: String): Flow<Boolean> {
-        return localDataSource.getFavoriteByIdAudio(idAudio).map {!it.isNullOrEmpty() }
+        return localDataSource.getFavoriteByIdAudio(idAudio).map { !it.isNullOrEmpty() }
     }
 
     override fun setRecentPlayedAudio(audio: Audio) {
@@ -181,7 +169,9 @@ class BarqiRepository(
     override fun getRecentPlayedAudios(): Flow<Resource<List<Audio>>> {
         return flow {
             emit(Resource.Loading())
-            emitAll(localDataSource.getListRecent().map { Resource.Success(RecentPlayedAudioMapper.mapEntitiesToAudios(it)) })
+            emitAll(
+                localDataSource.getListRecent()
+                    .map { Resource.Success(RecentPlayedAudioMapper.mapEntitiesToAudios(it)) })
         }
     }
 
@@ -218,7 +208,7 @@ class BarqiRepository(
                 audio.url?.toDeleteFile()
                 localDataSource.deleteDownloadedByIdAudio(audio.id.toString())
                 emit(Resource.Success(true))
-            }catch (e: Throwable) {
+            } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
         }.flowOn(Dispatchers.IO)
@@ -227,7 +217,9 @@ class BarqiRepository(
     override fun getAudiosDownload(): Flow<Resource<List<Audio>>> {
         return flow {
             emit(Resource.Loading())
-            emitAll(localDataSource.getListDownloaded().map { Resource.Success(DownloadedAudioMapper.mapEntitiesToDomains(it)) })
+            emitAll(
+                localDataSource.getListDownloaded()
+                    .map { Resource.Success(DownloadedAudioMapper.mapEntitiesToDomains(it)) })
         }
     }
 
@@ -258,7 +250,10 @@ class BarqiRepository(
     override fun addAudioToPlaylist(playlistId: Int, audio: Audio): Flow<Resource<Boolean>> {
         return flow {
             emit(Resource.Loading())
-            val audioEntity = AudioEntity(audioId = audio.id?.toLong(), audio = AudioMapper.mapDomainToEntity(audio))
+            val audioEntity = AudioEntity(
+                audioId = audio.id?.toLong(),
+                audio = AudioMapper.mapDomainToEntity(audio)
+            )
             localDataSource.insertAudio(audioEntity)
             localDataSource.addAudioToPlaylist(PlaylistAudioCrossRef(playlistId, audio.id ?: -1))
             emit(Resource.Success(true))
@@ -276,14 +271,18 @@ class BarqiRepository(
     override fun getListPlaylist(): Flow<Resource<List<Playlist>>> {
         return flow {
             emit(Resource.Loading())
-            emitAll(localDataSource.getListPlaylist().map { Resource.Success(PlaylistMapper.mapEntitiesToDomains(it)) })
+            emitAll(
+                localDataSource.getListPlaylist()
+                    .map { Resource.Success(PlaylistMapper.mapEntitiesToDomains(it)) })
         }
     }
 
     override fun getPlaylistAndAudios(): Flow<Resource<List<PlaylistAndAudios>>> {
         return flow {
             emit(Resource.Loading())
-            emitAll(localDataSource.getPlaylistAndAudios().map { Resource.Success(PlaylistAndAudioMapper.mapEntitiesToDomains(it)) })
+            emitAll(
+                localDataSource.getPlaylistAndAudios()
+                    .map { Resource.Success(PlaylistAndAudioMapper.mapEntitiesToDomains(it)) })
         }
     }
 
@@ -291,8 +290,10 @@ class BarqiRepository(
         return flow<Resource<List<Audio>>> {
             try {
                 emit(Resource.Loading())
-                emitAll(localDataSource.getAudiosByPlaylist(idPlaylist).map { Resource.Success(AudioMapper.mapEntitiesToDomains(it)) })
-            }catch (e: Throwable) {
+                emitAll(
+                    localDataSource.getAudiosByPlaylist(idPlaylist)
+                        .map { Resource.Success(AudioMapper.mapEntitiesToDomains(it)) })
+            } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
         }
@@ -307,7 +308,12 @@ class BarqiRepository(
 
     override fun setCurrentPlaying(audio: Audio) {
         GlobalScope.launch {
-            localDataSource.setCurrentPlaying(CurrentPlayingEntity(1, AudioMapper.mapDomainToEntity(audio)))
+            localDataSource.setCurrentPlaying(
+                CurrentPlayingEntity(
+                    1,
+                    AudioMapper.mapDomainToEntity(audio)
+                )
+            )
         }
     }
 
@@ -315,7 +321,7 @@ class BarqiRepository(
         return flow {
             emit(Resource.Loading())
             localDataSource.getCurrentPlaying().collect {
-                if(it.isNotEmpty()) {
+                if (it.isNotEmpty()) {
                     val result = AudioMapper.mapEntityToDomain(it.first().audio)
                     emit(Resource.Success(result))
                 }
@@ -329,7 +335,7 @@ class BarqiRepository(
                 emit(Resource.Loading())
                 remoteDataSource.addRequestedAudio(context.packageName, data)
                 emit(Resource.Success(true))
-            }catch (e: Throwable) {
+            } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
         }
@@ -341,7 +347,7 @@ class BarqiRepository(
                 emit(Resource.Loading())
                 val response = remoteDataSource.getRequestedAudio(context.packageName)
                 emit(Resource.Success(RequestedAudioMapper.mapResponsesToDomains(response)))
-            }catch (e: Throwable) {
+            } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
         }

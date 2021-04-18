@@ -1,9 +1,11 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity
 
-import androidx.room.*
+import androidx.room.Embedded
+import androidx.room.Junction
+import androidx.room.Relation
 
 
-data class PlaylistAndAudiosEntity (
+data class PlaylistAndAudiosEntity(
     @Embedded
     val playlist: PlaylistEntity,
     @Relation(

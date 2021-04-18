@@ -12,6 +12,7 @@ object PlaylistMapper {
                 playlistImage = playlistImage,
             )
         }
+
     fun mapEntityToDomain(input: PlaylistEntity) =
         with(input) {
             Playlist(
@@ -22,14 +23,14 @@ object PlaylistMapper {
         }
 
     fun mapEntitiesToDomains(input: List<PlaylistEntity>) =
-            input.map {
-                with(it) {
-                    Playlist(
-                            playlistId = playlistId,
-                            playlistName = playlistName,
-                            playlistImage = playlistImage,
-                    )
-                }
+        input.map {
+            with(it) {
+                Playlist(
+                    playlistId = playlistId,
+                    playlistName = playlistName,
+                    playlistImage = playlistImage,
+                )
             }
+        }
 
 }

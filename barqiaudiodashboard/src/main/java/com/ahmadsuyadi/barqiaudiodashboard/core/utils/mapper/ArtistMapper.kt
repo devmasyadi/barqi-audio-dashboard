@@ -9,7 +9,8 @@ object ArtistMapper {
             Artist(
                 id = it.id,
                 name = it.name,
-                image = it.image
+                image = it.image,
+                totalAudio = it.totalAudio
             )
         }
 }

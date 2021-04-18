@@ -10,7 +10,6 @@ interface IBarqiRepository {
     fun getArtists(): Flow<Resource<List<Artist>>>
     fun getAudios(): Flow<Resource<List<Audio>>>
     fun increaseView(idAudio: String?)
-    fun getArtistsV2(): Flow<Resource<List<ArtisV2>>>
     fun getAudiosTrending(limit: Int?): Flow<Resource<List<Audio>>>
     fun getAudiosRecent(limit: Int? = 0): Flow<Resource<List<Audio>>>
     fun getLatestUpload(limit: Int? = 0): Flow<Resource<List<Audio>>>
@@ -38,6 +37,6 @@ interface IBarqiRepository {
     fun getDataDummyTest(): Flow<Resource<List<PlaylistAudioCrossRef>>>
     fun setCurrentPlaying(audio: Audio)
     fun getCurrentPlaying(): Flow<Resource<Audio>>
-    fun addRequestAudio(data: RequestedAudio):Flow<Resource<Boolean>>
-    fun getRequestedAudios():Flow<Resource<List<RequestedAudio>>>
+    fun addRequestAudio(data: RequestedAudio): Flow<Resource<Boolean>>
+    fun getRequestedAudios(): Flow<Resource<List<RequestedAudio>>>
 }

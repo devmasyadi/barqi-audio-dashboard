@@ -6,7 +6,6 @@ import androidx.core.app.JobIntentService
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.Resource
 import com.ahmadsuyadi.barqiaudiodashboard.core.viewmodel.BarqiDashboardViewModel
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import org.jetbrains.anko.AnkoLogger
@@ -19,7 +18,7 @@ class AddDownloadToDbIntentService : JobIntentService(), AnkoLogger {
 
     companion object {
         private const val JOB_ID = 1000
-        fun enqueueWork(context: Context, intent: Intent){
+        fun enqueueWork(context: Context, intent: Intent) {
             enqueueWork(context, AddDownloadToDbIntentService::class.java, JOB_ID, intent)
         }
     }
@@ -29,7 +28,7 @@ class AddDownloadToDbIntentService : JobIntentService(), AnkoLogger {
         val reqDownload = intent.getLongExtra("A", -1)
         GlobalScope.launch {
             barqiDashboardViewModel.updateAudioDownloadByReq(reqDownload).collect { resources ->
-                when(resources) {
+                when (resources) {
                     is Resource.Error -> info("Hallo downloadIntent error: ${resources.message}")
                     is Resource.Loading -> info("Hallo downloadIntent loading")
                     is Resource.Success -> {

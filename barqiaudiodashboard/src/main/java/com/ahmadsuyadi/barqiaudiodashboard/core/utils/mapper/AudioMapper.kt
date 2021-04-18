@@ -18,7 +18,7 @@ object AudioMapper {
                 artist = it.artist,
                 lastView = it.lastView,
                 image = it.image,
-                    idServer = it.id
+                idServer = it.id
             )
         }
 
@@ -34,7 +34,7 @@ object AudioMapper {
                 artist = artist,
                 lastView = lastView,
                 image = image,
-                    idServer = idServer
+                idServer = idServer
             )
         }
 
@@ -51,13 +51,13 @@ object AudioMapper {
                 lastView = lastView,
                 image = image,
                 reqDownloaded = reqDownloaded,
-                    idServer = idServer
+                idServer = idServer
             )
         }
 
     fun mapEntitiesToDomains(input: List<AudioEntity>) =
-            input.map {
-                mapEntityToDomain(it.audio)
-            }
+        input.map {
+            mapEntityToDomain(it.audio)
+        }
 
 }

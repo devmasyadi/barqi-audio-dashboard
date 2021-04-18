@@ -6,8 +6,8 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "currentPlaying")
 data class CurrentPlayingEntity(
-        @PrimaryKey
-        val idCurrentPlayingEntity: Int = 1,
-        @Embedded
-        val audio: DataAudioEntity
+    @PrimaryKey
+    val idCurrentPlayingEntity: Int = 1,
+    @Embedded
+    val audio: DataAudioEntity
 )

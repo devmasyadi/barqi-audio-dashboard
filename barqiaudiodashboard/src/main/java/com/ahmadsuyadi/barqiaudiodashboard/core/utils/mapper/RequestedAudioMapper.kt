@@ -4,19 +4,19 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.Requ
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 
 object RequestedAudioMapper {
-    fun mapResponsesToDomains (input: List<RequestedAudioResponse>) =
-            input.map {
-                with(it) {
-                    RequestedAudio(
-                            createdAt = createdAt,
-                            titleAudioRequested = titleAudioRequested,
-                            name = name,
-                            id = id,
-                            dateSolved = dateSolved,
-                            email = email,
-                            isComplete = isComplete,
-                            updatedAt = updatedAt,
-                    )
-                }
+    fun mapResponsesToDomains(input: List<RequestedAudioResponse>) =
+        input.map {
+            with(it) {
+                RequestedAudio(
+                    createdAt = createdAt,
+                    titleAudioRequested = titleAudioRequested,
+                    name = name,
+                    id = id,
+                    dateSolved = dateSolved,
+                    email = email,
+                    isComplete = isComplete,
+                    updatedAt = updatedAt,
+                )
             }
+        }
 }

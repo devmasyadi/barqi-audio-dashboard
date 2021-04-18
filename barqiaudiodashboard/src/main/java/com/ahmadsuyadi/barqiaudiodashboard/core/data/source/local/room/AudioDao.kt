@@ -74,7 +74,7 @@ interface AudioDao {
     @Query("SELECT * FROM playlist")
     fun getListPlaylist(): Flow<List<PlaylistEntity>>
 
-//    @Query("SELECT * FROM dataPlaylistAndAudio LEFT JOIN playlist ON foreignPlaylistId=playlistId LEFT JOIN audio ON foreignAudioId=idAudio")
+    //    @Query("SELECT * FROM dataPlaylistAndAudio LEFT JOIN playlist ON foreignPlaylistId=playlistId LEFT JOIN audio ON foreignAudioId=idAudio")
     @Transaction
     @Query("SELECT * FROM playlist")
     fun getPlaylistAndAudios(): Flow<List<PlaylistAndAudiosEntity>>

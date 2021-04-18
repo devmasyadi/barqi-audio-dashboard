@@ -31,6 +31,16 @@ class RequestedAudioActivity : AppCompatActivity(), AnkoLogger {
             }
         })
 
+        barqiDashboardViewModel.getArtists().observe(this, { resources ->
+            when(resources) {
+                is Resource.Error -> info("Hallo error getArtists: ${resources.message}")
+                is Resource.Loading -> info("Hallo loading getArtists")
+                is Resource.Success -> {
+                    info("Hallo success getArtists: ${resources.data}")
+                }
+            }
+        })
+
         binding.btnSubmit.setOnClickListener {
             addRequestedAudio()
         }

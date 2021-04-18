@@ -17,9 +17,11 @@ class RemoteDataSource(
 
     suspend fun getArtistsV2(packageName: String) = apiService.getArtistsV2(packageName)
 
-    suspend fun getAudiosTrending(packageName: String, limit: Int?) = apiService.getAudiosTrending(packageName, limit)
+    suspend fun getAudiosTrending(packageName: String, limit: Int?) =
+        apiService.getAudiosTrending(packageName, limit)
 
-    suspend fun getLatestUpload(packageName: String, limit: Int?) = apiService.getLatestUpload(packageName, limit)
+    suspend fun getLatestUpload(packageName: String, limit: Int?) =
+        apiService.getLatestUpload(packageName, limit)
 
     suspend fun getAudiosRecent(limit: Int?) = apiService.getAudiosRecent(limit)
 
@@ -27,7 +29,8 @@ class RemoteDataSource(
 
     suspend fun getAudioByArtistId(artistId: String?) = apiService.getByArtistID(artistId)
 
-    suspend fun addRequestedAudio(packageName: String?, data: RequestedAudio?) = apiService.addRequestedAudio(packageName, data)
+    suspend fun addRequestedAudio(packageName: String?, data: RequestedAudio?) =
+        apiService.addRequestedAudio(packageName, data)
 
     suspend fun getRequestedAudio(packageName: String?) = apiService.getRequestedAudio(packageName)
 

@@ -17,5 +17,8 @@ data class ArtistResponse(
     val id: String? = null,
 
     @field:SerializedName("updatedAt")
-    val updatedAt: String? = null
+    val updatedAt: String? = null,
+
+    @field:SerializedName("totalAudio")
+    val totalAudio: Int? = null
 )

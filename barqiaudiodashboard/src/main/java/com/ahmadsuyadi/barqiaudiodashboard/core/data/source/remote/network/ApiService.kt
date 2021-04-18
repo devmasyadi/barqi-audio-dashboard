@@ -1,6 +1,9 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network
 
-import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.*
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.ArtistResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.RequestedAudioResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -11,12 +14,12 @@ interface ApiService {
         @Query("packageName") packageName: String
     ): InfoAppResponse
 
-    @GET("api/apps/artist")
+    @GET("api/apps/artistV3")
     suspend fun getArtists(
         @Query("packageName") packageName: String
     ): List<ArtistResponse>
 
-    @GET("api/apps/audios")
+    @GET("api/apps/audios/artistHome")
     suspend fun getAudios(
         @Query("packageName") packageName: String
     ): List<AudioResponse>
@@ -26,10 +29,6 @@ interface ApiService {
         @Query("id") idAudio: String
     ): ResponseBody
 
-    @GET("api/apps/artistV2")
-    suspend fun getArtistsV2(
-        @Query("packageName") packageName: String
-    ): List<ArtistV2Response>
 
     @GET("api/apps/audios/trending")
     suspend fun getAudiosTrending(
@@ -60,13 +59,13 @@ interface ApiService {
 
     @POST("api/requestedAudio")
     suspend fun addRequestedAudio(
-            @Query("packageName") packageName: String? = null,
-            @Body requestedAudio: RequestedAudio? =null
+        @Query("packageName") packageName: String? = null,
+        @Body requestedAudio: RequestedAudio? = null
     ): ResponseBody
 
     @GET("api/requestedAudio/byApp")
     suspend fun getRequestedAudio(
-            @Query("packageName") packageName: String? = null
+        @Query("packageName") packageName: String? = null
     ): List<RequestedAudioResponse>
 
 }

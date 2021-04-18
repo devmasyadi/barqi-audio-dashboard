@@ -17,26 +17,38 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
     fun getAudiosRecent(limit: Int? = 0) = barqiRepository.getAudiosRecent(limit).asLiveData()
     fun getLatestUpload(limit: Int? = 0) = barqiRepository.getLatestUpload(limit).asLiveData()
     fun searchAudio(nameAudio: String) = barqiRepository.searchAudio(nameAudio).asLiveData()
-    fun getAudioByIdArtist(idArtist: String) = barqiRepository.getAudioByIdArtist(idArtist).asLiveData()
+    fun getAudioByIdArtist(idArtist: String) =
+        barqiRepository.getAudioByIdArtist(idArtist).asLiveData()
+
     fun addAudioToFavorite(audio: Audio) = barqiRepository.addAudioToFavorite(audio).asLiveData()
-    fun removeAudioFromFavorite(idAudio: Int) = barqiRepository.removeAudioFromFavorite(idAudio).asLiveData()
+    fun removeAudioFromFavorite(idAudio: Int) =
+        barqiRepository.removeAudioFromFavorite(idAudio).asLiveData()
+
     fun getFavoriteAudios() = barqiRepository.getFavoriteAudios().asLiveData()
     fun isAudioFavorite(idAudio: String) = barqiRepository.isAudioFavorite(idAudio).asLiveData()
     fun setRecentPlayedAudio(audio: Audio) = barqiRepository.setRecentPlayedAudio(audio)
     fun getRecentPlayedAudios() = barqiRepository.getRecentPlayedAudios().asLiveData()
     fun deleteAllRecentPlayed() = barqiRepository.deleteAllRecentPlayed().asLiveData()
     fun addToDownload(audio: Audio) = barqiRepository.addToDownload(audio).asLiveData()
-    fun updateAudioDownloadByReq(reqDownload: Long) = barqiRepository.updateAudioDownloadByReq(reqDownload)
+    fun updateAudioDownloadByReq(reqDownload: Long) =
+        barqiRepository.updateAudioDownloadByReq(reqDownload)
+
     fun deleteFromDownload(audio: Audio) = barqiRepository.deleteFromDownload(audio).asLiveData()
     fun getAudiosDownload() = barqiRepository.getAudiosDownload().asLiveData()
     fun addPlaylist(playlist: Playlist) = barqiRepository.addPlaylist(playlist).asLiveData()
     fun editPlaylist(playlist: Playlist) = barqiRepository.editPlaylist(playlist).asLiveData()
     fun deletePlaylist(idPlaylist: Int) = barqiRepository.deletePlaylist(idPlaylist).asLiveData()
-    fun addAudioToPlaylist(playlistId: Int, audio: Audio) = barqiRepository.addAudioToPlaylist(playlistId, audio).asLiveData()
-    fun deleteAudioPlaylist(playlistId: Int, audioId: Int) = barqiRepository.deleteAudioFromPlaylist(playlistId, audioId).asLiveData()
+    fun addAudioToPlaylist(playlistId: Int, audio: Audio) =
+        barqiRepository.addAudioToPlaylist(playlistId, audio).asLiveData()
+
+    fun deleteAudioPlaylist(playlistId: Int, audioId: Int) =
+        barqiRepository.deleteAudioFromPlaylist(playlistId, audioId).asLiveData()
+
     fun getListPlaylist() = barqiRepository.getListPlaylist().asLiveData()
     fun getPlaylistAndAudios() = barqiRepository.getPlaylistAndAudios().asLiveData()
-    fun getAudiosByPlaylist(playlistId: Int) = barqiRepository.getAudiosByPlaylist(playlistId).asLiveData()
+    fun getAudiosByPlaylist(playlistId: Int) =
+        barqiRepository.getAudiosByPlaylist(playlistId).asLiveData()
+
     fun getDummyTest() = barqiRepository.getDataDummyTest().asLiveData()
     fun setCurrentPlaying(audio: Audio) = barqiRepository.setCurrentPlaying(audio)
     fun getCurrentPlaying() = barqiRepository.getCurrentPlaying().asLiveData()
