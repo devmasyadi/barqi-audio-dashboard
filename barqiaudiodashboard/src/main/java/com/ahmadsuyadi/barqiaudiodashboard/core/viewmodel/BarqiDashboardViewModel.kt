@@ -12,7 +12,6 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
     fun getArtists() = barqiRepository.getArtists().asLiveData()
     fun getAudios() = barqiRepository.getAudios().asLiveData()
     fun increaseView(idAudio: String?) = barqiRepository.increaseView(idAudio)
-    fun getArtistsV2() = barqiRepository.getArtistsV2().asLiveData()
     fun getAudiosTrending(limit: Int?) = barqiRepository.getAudiosTrending(limit).asLiveData()
     fun getAudiosRecent(limit: Int? = 0) = barqiRepository.getAudiosRecent(limit).asLiveData()
     fun getLatestUpload(limit: Int? = 0) = barqiRepository.getLatestUpload(limit).asLiveData()

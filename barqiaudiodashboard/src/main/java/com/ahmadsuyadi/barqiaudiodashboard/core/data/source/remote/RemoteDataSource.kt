@@ -15,8 +15,6 @@ class RemoteDataSource(
 
     suspend fun increaseView(idAudio: String) = apiService.increaseView(idAudio)
 
-    suspend fun getArtistsV2(packageName: String) = apiService.getArtistsV2(packageName)
-
     suspend fun getAudiosTrending(packageName: String, limit: Int?) =
         apiService.getAudiosTrending(packageName, limit)
 

@@ -47,12 +47,16 @@ object Utils {
         request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI or DownloadManager.Request.NETWORK_MOBILE)
         request.setAllowedOverRoaming(false)
         request.setTitle("Download ${audio.title}.mp3")
-        request.setVisibleInDownloadsUi(true)
-        val file = File(
+       /* val file = File(
+            Environment.getExternalStorageState(),
+            "/${context.packageName}/${audio.title?.validateTitleDownload()}.mp3"
+        )*/
+       /* val file = File(
             Environment.getExternalStorageDirectory(),
             "/${context.packageName}/${audio.title?.validateTitleDownload()}.mp3"
-        )
-        request.setDestinationUri(Uri.fromFile(file))
+        )*/
+//        request.setDestinationUri(Uri.fromFile(file))
+        request.setDestinationInExternalFilesDir(context, Environment.DIRECTORY_DOWNLOADS, "/${context.packageName}/${audio.title?.validateTitleDownload()}.mp3")
         return downloadManager.enqueue(request)
     }
 }

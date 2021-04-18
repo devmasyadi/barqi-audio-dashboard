@@ -17,18 +17,18 @@ class DownloadAudioReceiver : BroadcastReceiver(), AnkoLogger {
         moveFileDownload(context)
         val intentDownload = Intent(context, AddDownloadToDbIntentService::class.java)
         val reqDownload = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-        info("Hallo on download Success BroadcastReceiver: $reqDownload")
-        intentDownload.putExtra("A", reqDownload)
+        intentDownload.putExtra(AddDownloadToDbIntentService.REQ_DOWNLOAD, reqDownload)
         AddDownloadToDbIntentService.enqueueWork(context, intentDownload)
     }
 
     private fun moveFileDownload(context: Context) {
-        val file = File(Environment.getExternalStorageDirectory(), "/${context.packageName}/")
-        file.listFiles().forEach {
+        val file = File(context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS), "/${context.packageName}/")
+        file.listFiles()?.forEach {
             try {
                 it.copyTo(File("${context.applicationInfo.dataDir}/${it.name}"), true)
                 it.delete()
             } catch (e: Exception) {
+                info("Hallo file error:${e.message}")
                 it.delete()
             }
         }
