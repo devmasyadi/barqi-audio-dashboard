@@ -193,11 +193,9 @@ class BarqiRepository(
         }.flowOn(Dispatchers.IO)
     }
 
-    override fun updateAudioDownloadByReq(idReqDownload: Long): Flow<Resource<Boolean>> {
-        return flow {
-            emit(Resource.Loading())
+    override fun updateAudioDownloadByReq(idReqDownload: Long) {
+        GlobalScope.launch(Dispatchers.IO) {
             localDataSource.updateDownloadedByReq(idReqDownload)
-            emit(Resource.Success(true))
         }
     }
 
@@ -307,7 +305,7 @@ class BarqiRepository(
     }
 
     override fun setCurrentPlaying(audio: Audio) {
-        GlobalScope.launch {
+        GlobalScope.launch (Dispatchers.IO){
             localDataSource.setCurrentPlaying(
                 CurrentPlayingEntity(
                     1,
