@@ -38,6 +38,16 @@ class MainActivity : AppCompatActivity(), AnkoLogger {
 
         checkPermissions(this)
 
+        barqiDashboardViewModel.getInfoApp().observe(this, { resources ->
+            when(resources) {
+                is Resource.Error -> info("Hallo infoAppyah error: ${resources.message}")
+                is Resource.Loading -> info("Hallo infoAppyah loading")
+                is Resource.Success -> {
+                    info("Hallo infoAppyah success ${resources.data}")
+                }
+            }
+        })
+
         dialogListPlaylist = AlertDialog.Builder(this) .apply {
             this.setTitle("Add to Playlist")
             /*this.setView (R.layout.dialog_playlist)

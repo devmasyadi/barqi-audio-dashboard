@@ -56,3 +56,6 @@ public *;
 ##---------------Begin: proguard configuration for RxJava ----------
 # Uncomment if you use RxJava
 #-dontwarn java.util.concurrent.Flow*
+
+#model
+#-keep class com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.** { *; }
