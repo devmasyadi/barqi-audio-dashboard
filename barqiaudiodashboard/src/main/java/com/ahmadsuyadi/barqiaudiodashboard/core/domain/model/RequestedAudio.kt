@@ -6,6 +6,7 @@ data class RequestedAudio(
     val name: String? = null,
     val id: String? = null,
     val dateSolved: String? = null,
+    val dateRequest: String? = null,
     val email: String? = null,
     val isComplete: Boolean? = null,
     val updatedAt: String? = null

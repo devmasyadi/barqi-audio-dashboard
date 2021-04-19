@@ -16,6 +16,7 @@ object RequestedAudioMapper {
                     email = email,
                     isComplete = isComplete,
                     updatedAt = updatedAt,
+                        dateRequest = dateRequest
                 )
             }
         }

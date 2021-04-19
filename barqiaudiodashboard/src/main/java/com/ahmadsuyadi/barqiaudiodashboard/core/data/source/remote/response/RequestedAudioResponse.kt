@@ -19,6 +19,9 @@ data class RequestedAudioResponse(
     @field:SerializedName("dateSolved")
     val dateSolved: String? = null,
 
+    @field:SerializedName("dateRequest")
+    val dateRequest: String? = null,
+
     @field:SerializedName("email")
     val email: String? = null,
 
