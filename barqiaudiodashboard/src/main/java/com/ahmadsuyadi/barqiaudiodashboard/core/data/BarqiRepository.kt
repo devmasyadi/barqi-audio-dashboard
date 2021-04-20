@@ -1,6 +1,7 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data
 
 import android.content.Context
+import com.ahmadsuyadi.barqiaudiodashboard.R
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.LocalDataSource
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.AudioEntity
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.CurrentPlayingEntity
@@ -331,8 +332,11 @@ class BarqiRepository(
         return flow<Resource<Boolean>> {
             try {
                 emit(Resource.Loading())
-                remoteDataSource.addRequestedAudio(context.packageName, data)
-                emit(Resource.Success(true))
+                if(isNetworkAvailable(context)) {
+                    remoteDataSource.addRequestedAudio(context.packageName, data)
+                    emit(Resource.Success(true))
+                } else
+                    emit(Resource.Error(context.getString(R.string.msg_turn_on_internet_connection)))
             } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
