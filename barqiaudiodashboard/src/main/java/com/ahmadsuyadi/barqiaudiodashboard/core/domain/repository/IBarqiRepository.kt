@@ -11,6 +11,10 @@ interface IBarqiRepository {
     fun getAudios(): Flow<Resource<List<Audio>>>
     fun increaseView(idAudio: String?)
     fun getAudiosTrending(limit: Int?): Flow<Resource<List<Audio>>>
+    fun playAudioGl(audio: Audio): Flow<Resource<Boolean>>
+    fun searchGl(keyword: String): Flow<Resource<List<Audio>>>
+    fun getTrendingGl(): Flow<Resource<List<Audio>>>
+    fun getLatestGl(): Flow<Resource<List<Audio>>>
     fun getAudiosRecent(limit: Int? = 0): Flow<Resource<List<Audio>>>
     fun getLatestUpload(limit: Int? = 0): Flow<Resource<List<Audio>>>
     fun searchAudio(nameAudio: String): Flow<Resource<List<Audio>>>

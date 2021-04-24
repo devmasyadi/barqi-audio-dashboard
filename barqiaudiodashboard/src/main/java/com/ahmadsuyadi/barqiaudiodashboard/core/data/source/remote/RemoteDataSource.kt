@@ -1,6 +1,7 @@
 package com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote
 
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.network.ApiService
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 
 class RemoteDataSource(
@@ -31,5 +32,10 @@ class RemoteDataSource(
         apiService.addRequestedAudio(packageName, data)
 
     suspend fun getRequestedAudio(packageName: String?) = apiService.getRequestedAudio(packageName)
+
+    suspend fun searchAudioGl(keyword: String?) = apiService.searchAudioGl(keyword)
+    suspend fun getTrendingGl() = apiService.getTrendingGl()
+    suspend fun getLatestGl() = apiService.getLatestGl()
+    suspend fun playAudioGl(audio: Audio?) = apiService.playAudioGl(audio)
 
 }

@@ -4,6 +4,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.Arti
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.AudioResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.InfoAppResponse
 import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.remote.response.RequestedAudioResponse
+import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.Audio
 import com.ahmadsuyadi.barqiaudiodashboard.core.domain.model.RequestedAudio
 import okhttp3.ResponseBody
 import retrofit2.http.*
@@ -67,5 +68,21 @@ interface ApiService {
     suspend fun getRequestedAudio(
         @Query("packageName") packageName: String? = null
     ): List<RequestedAudioResponse>
+
+    @GET("api/audios/searchv1")
+    suspend fun searchAudioGl(
+        @Query("keyword") keyword: String? = null
+    ): List<AudioResponse>
+
+    @GET("api/audios/trending")
+    suspend fun getTrendingGl(): List<AudioResponse>
+
+    @GET("api/audios/latest")
+    suspend fun getLatestGl(): List<AudioResponse>
+
+    @GET("api/audios/playAudio")
+    suspend fun playAudioGl(
+        @Body audio: Audio? = null
+    ): List<AudioResponse>
 
 }

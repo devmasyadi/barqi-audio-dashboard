@@ -82,6 +82,54 @@ class BarqiRepository(
         }
     }
 
+    override fun playAudioGl(audio: Audio): Flow<Resource<Boolean>> {
+        return flow<Resource<Boolean>> {
+            try {
+                emit(Resource.Loading())
+                remoteDataSource.playAudioGl(audio)
+                emit(Resource.Success(true))
+            } catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
+
+    override fun searchGl(keyword: String): Flow<Resource<List<Audio>>> {
+        return flow<Resource<List<Audio>>> {
+            try {
+                emit(Resource.Loading())
+                val resultData = remoteDataSource.searchAudioGl(keyword)
+                emit(Resource.Success(AudioMapper.mapResponsesToDomains(resultData)))
+            } catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
+
+    override fun getTrendingGl(): Flow<Resource<List<Audio>>> {
+        return flow<Resource<List<Audio>>> {
+            try {
+                emit(Resource.Loading())
+                val resultData = remoteDataSource.getTrendingGl()
+                emit(Resource.Success(AudioMapper.mapResponsesToDomains(resultData)))
+            } catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
+
+    override fun getLatestGl(): Flow<Resource<List<Audio>>> {
+        return flow<Resource<List<Audio>>> {
+            try {
+                emit(Resource.Loading())
+                val resultData = remoteDataSource.getLatestGl()
+                emit(Resource.Success(AudioMapper.mapResponsesToDomains(resultData)))
+            } catch (e: Throwable) {
+                emit(Resource.Error(e.handleMessageError()))
+            }
+        }
+    }
+
     override fun getAudiosRecent(limit: Int?): Flow<Resource<List<Audio>>> {
         return flow<Resource<List<Audio>>> {
             try {
