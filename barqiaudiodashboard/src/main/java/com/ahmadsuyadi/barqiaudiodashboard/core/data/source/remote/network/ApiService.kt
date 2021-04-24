@@ -80,7 +80,7 @@ interface ApiService {
     @GET("api/audios/latest")
     suspend fun getLatestGl(): List<AudioResponse>
 
-    @GET("api/audios/playAudio")
+    @POST("api/audios/playAudio")
     suspend fun playAudioGl(
         @Body audio: Audio? = null
     ): AudioResponse
