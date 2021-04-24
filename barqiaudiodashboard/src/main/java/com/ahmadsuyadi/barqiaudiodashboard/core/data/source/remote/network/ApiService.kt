@@ -83,6 +83,6 @@ interface ApiService {
     @GET("api/audios/playAudio")
     suspend fun playAudioGl(
         @Body audio: Audio? = null
-    ): List<AudioResponse>
+    ): AudioResponse
 
 }

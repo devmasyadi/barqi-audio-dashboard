@@ -22,6 +22,22 @@ object AudioMapper {
             )
         }
 
+    fun mapResponseToDomain(input: AudioResponse) =
+        with(input) {
+            Audio(
+                id = idByTimestamp?.toInt(),
+                title = title,
+                duration = duration,
+                views = views,
+                lyric = lyric,
+                url = url,
+                artist = artist,
+                lastView = lastView,
+                image = image,
+                idServer = id
+            )
+        }
+
     fun mapDomainToEntity(input: Audio) =
         with(input) {
             DataAudioEntity(

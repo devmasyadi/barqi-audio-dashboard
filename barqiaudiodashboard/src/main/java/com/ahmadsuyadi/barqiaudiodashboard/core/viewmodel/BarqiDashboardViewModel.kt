@@ -54,7 +54,7 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
     fun addRequestAudio(data: RequestedAudio) = barqiRepository.addRequestAudio(data).asLiveData()
     fun getRequestedAudios() = barqiRepository.getRequestedAudios().asLiveData()
 
-    fun playAudioGl(audio: Audio) = barqiRepository.playAudioGl(audio).asLiveData()
+    fun playAudioGl(audio: Audio) = barqiRepository.playAudioGl(audio)
     fun searchGl(keyword: String) = barqiRepository.searchGl(keyword).asLiveData()
     fun getTrendingGl() = barqiRepository.getTrendingGl().asLiveData()
     fun getLatestGl() = barqiRepository.getLatestGl().asLiveData()

@@ -82,12 +82,12 @@ class BarqiRepository(
         }
     }
 
-    override fun playAudioGl(audio: Audio): Flow<Resource<Boolean>> {
-        return flow<Resource<Boolean>> {
+    override fun playAudioGl(audio: Audio): Flow<Resource<Audio>> {
+        return flow<Resource<Audio>> {
             try {
                 emit(Resource.Loading())
-                remoteDataSource.playAudioGl(audio)
-                emit(Resource.Success(true))
+                val result = remoteDataSource.playAudioGl(audio)
+                emit(Resource.Success(AudioMapper.mapResponseToDomain(result)))
             } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
             }
