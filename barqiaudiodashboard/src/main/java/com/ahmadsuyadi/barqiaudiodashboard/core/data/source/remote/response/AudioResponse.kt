@@ -31,6 +31,9 @@ data class AudioResponse(
     @field:SerializedName("url")
     val url: String? = null,
 
+    @field:SerializedName("urlDownload")
+    val urlDownload: String? = null,
+
     @field:SerializedName("last_view")
     val lastView: String? = null,
 

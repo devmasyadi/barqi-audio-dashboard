@@ -16,5 +16,6 @@ data class Audio(
     val lastView: String? = null,
     var reqDownloaded: Long? = null,
     var idServer: String? = null,
+    var urlDownload: String? = null,
 ) : Parcelable
 

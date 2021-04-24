@@ -13,7 +13,7 @@ import com.ahmadsuyadi.barqiaudiodashboard.core.data.source.local.entity.*
         PlaylistEntity::class,
         RecentAudioEntity::class,
         CurrentPlayingEntity::class
-    ], version = 4, exportSchema = false
+    ], version = 5, exportSchema = false
 )
 abstract class BarqiDatabase : RoomDatabase() {
     abstract fun audioDao(): AudioDao

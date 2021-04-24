@@ -23,4 +23,5 @@ data class DataAudioEntity(
     val url: String? = null,
     val lastView: String? = null,
     val idServer: String? = null,
+    val urlDownload: String? = null,
 )

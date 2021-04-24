@@ -18,7 +18,8 @@ object AudioMapper {
                 artist = it.artist,
                 lastView = it.lastView,
                 image = it.image,
-                idServer = it.id
+                idServer = it.id,
+                urlDownload = it.urlDownload
             )
         }
 
@@ -34,7 +35,8 @@ object AudioMapper {
                 artist = artist,
                 lastView = lastView,
                 image = image,
-                idServer = id
+                idServer = id,
+                urlDownload = urlDownload
             )
         }
 
@@ -50,7 +52,8 @@ object AudioMapper {
                 artist = artist,
                 lastView = lastView,
                 image = image,
-                idServer = idServer
+                idServer = idServer,
+                urlDownload = urlDownload
             )
         }
 
@@ -67,7 +70,8 @@ object AudioMapper {
                 lastView = lastView,
                 image = image,
                 reqDownloaded = reqDownloaded,
-                idServer = idServer
+                idServer = idServer,
+                urlDownload = urlDownload
             )
         }
 
