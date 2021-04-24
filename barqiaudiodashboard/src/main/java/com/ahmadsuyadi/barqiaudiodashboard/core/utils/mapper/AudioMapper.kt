@@ -57,6 +57,21 @@ object AudioMapper {
             )
         }
 
+    fun mapDomainToResponse(input: Audio) =
+        with(input) {
+            AudioResponse(
+                title = title,
+                duration = duration,
+                views = views,
+                lyric = lyric,
+                url = url,
+                artist = artist,
+                lastView = lastView,
+                image = image,
+                urlDownload = urlDownload
+            )
+        }
+
     fun mapEntityToDomain(input: DataAudioEntity, reqDownloaded: Long? = -1) =
         with(input) {
             Audio(

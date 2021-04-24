@@ -86,7 +86,7 @@ class BarqiRepository(
         return flow<Resource<Audio>> {
             try {
                 emit(Resource.Loading())
-                val result = remoteDataSource.playAudioGl(audio)
+                val result = remoteDataSource.playAudioGl(AudioMapper.mapDomainToResponse(audio))
                 emit(Resource.Success(AudioMapper.mapResponseToDomain(result)))
             } catch (e: Throwable) {
                 emit(Resource.Error(e.handleMessageError()))
@@ -230,6 +230,10 @@ class BarqiRepository(
             localDataSource.deleteAllRecent()
             emit(Resource.Success(true))
         }.flowOn(Dispatchers.IO)
+    }
+
+    override fun isFromDownload(idAudio: String): Flow<Boolean> {
+        return localDataSource.getDownloadByIdAudio(idAudio).map { !it.isNullOrEmpty() }
     }
 
     override fun addToDownload(audio: Audio): Flow<Resource<Boolean>> {

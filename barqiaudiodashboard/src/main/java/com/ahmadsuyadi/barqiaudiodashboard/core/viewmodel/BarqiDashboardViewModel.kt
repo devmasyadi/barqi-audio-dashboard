@@ -33,6 +33,7 @@ class BarqiDashboardViewModel(private val barqiRepository: BarqiRepository) : Vi
         barqiRepository.updateAudioDownloadByReq(reqDownload)
 
     fun deleteFromDownload(audio: Audio) = barqiRepository.deleteFromDownload(audio).asLiveData()
+    fun isFromDownload(idAudio: String)= barqiRepository.isFromDownload(idAudio).asLiveData()
     fun getAudiosDownload() = barqiRepository.getAudiosDownload().asLiveData()
     fun addPlaylist(playlist: Playlist) = barqiRepository.addPlaylist(playlist).asLiveData()
     fun editPlaylist(playlist: Playlist) = barqiRepository.editPlaylist(playlist).asLiveData()

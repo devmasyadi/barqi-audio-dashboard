@@ -26,6 +26,7 @@ interface IBarqiRepository {
     fun setRecentPlayedAudio(audio: Audio)
     fun getRecentPlayedAudios(): Flow<Resource<List<Audio>>>
     fun deleteAllRecentPlayed(): Flow<Resource<Boolean>>
+    fun isFromDownload(idAudio: String): Flow<Boolean>
     fun addToDownload(audio: Audio): Flow<Resource<Boolean>>
     fun updateAudioDownloadByReq(idReqDownload: Long)
     fun deleteFromDownload(audio: Audio): Flow<Resource<Boolean>>

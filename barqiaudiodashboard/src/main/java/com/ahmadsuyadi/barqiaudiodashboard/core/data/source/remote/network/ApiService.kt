@@ -82,7 +82,7 @@ interface ApiService {
 
     @POST("api/audios/playAudio")
     suspend fun playAudioGl(
-        @Body audio: Audio? = null
+        @Body audio: AudioResponse? = null
     ): AudioResponse
 
 }
