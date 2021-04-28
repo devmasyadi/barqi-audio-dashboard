@@ -36,6 +36,8 @@ class LocalDataSource(
 
     fun getListDownloaded() = audioDao.getListDownloaded()
 
+    fun getDownloadByIdAudio(idDownload: String) = audioDao.getDownloadByIdAudio(idDownload)
+
     //Playlist
     suspend fun insertPlaylist(data: PlaylistEntity) = audioDao.insertPlaylist(data)
     suspend fun updatePlaylist(data: PlaylistEntity) = audioDao.updatePlaylist(data)

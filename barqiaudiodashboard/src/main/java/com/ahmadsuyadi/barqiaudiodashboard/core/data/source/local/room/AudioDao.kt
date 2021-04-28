@@ -52,6 +52,9 @@ interface AudioDao {
     @Query("SELECT * FROM downloadedAudio WHERE isDownloaded=1")
     fun getListDownloaded(): Flow<List<DownloadedAudioEntity>>
 
+    @Query("SELECT * FROM downloadedAudio WHERE dataAudioId = :idDownload")
+    fun getDownloadByIdAudio(idDownload: String): Flow<List<DownloadedAudioEntity>>
+
     //Playlist
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertPlaylist(data: PlaylistEntity): Long

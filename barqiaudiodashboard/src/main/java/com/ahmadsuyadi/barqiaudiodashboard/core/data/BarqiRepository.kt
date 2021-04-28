@@ -184,6 +184,10 @@ class BarqiRepository(
         }.flowOn(Dispatchers.IO)
     }
 
+    override fun isFromDownload(idAudio: String): Flow<Boolean> {
+        return localDataSource.getDownloadByIdAudio(idAudio).map { !it.isNullOrEmpty() }
+    }
+
     override fun addToDownload(audio: Audio): Flow<Resource<Boolean>> {
         return flow {
             emit(Resource.Loading())
